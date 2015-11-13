@@ -4,49 +4,49 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
 import com.github.binome.murderhobo.Main;
-import com.github.binome.murderhobo.Settings;
 
-/**
- * @author SkylarRowan
- * Abstract superclass for all game scenes. Title, pause, game over, lvj, etc.
- */
 public abstract class Scene
 {
-    protected boolean keepGoing;
-    
-    /**
-     * Updates the scene than draw the frame
-     * @param delta time passed since last frame draw
-     * @return false when time to exit
-     */
+    private boolean doExit = false;
+
+    // return false if the game should be quit
     public abstract boolean drawFrame(float delta);
 
-    protected Scene nextScene()
+    // null typically means Game should load menu
+    protected Scene nextScene() { return null; }
+
+    protected void exit()
     {
-	return this;
-    }
+        doExit=true;
+    };
 
-    /**
-     * First loop to be called when starting any scene.
-     * @return
-     */
-    public Scene go()
+    // returns false when game should be exited
+    public boolean go()
     {
-	keepGoing=true;
-	long lastloop = (Sys.getTime() * 1000 / Sys.getTimerResolution());
-	do
-	{
-	    Display.sync(Settings.TARGET_FPS);
-	    long now = (Sys.getTime() * 1000 / Sys.getTimerResolution());
-	    long delta = now - lastloop;
-	    lastloop = now;
+        long lastloop = (Sys.getTime()*1000 / Sys.getTimerResolution());
 
-	    keepGoing = drawFrame(delta);
+        boolean keepGoing = true;
+        do
+        {
+            Display.sync(60);   // 60 FPS
+            long now = (Sys.getTime()*1000 / Sys.getTimerResolution());
+            long delta = now - lastloop;
+            lastloop = now;
 
-	    // UPDATE DISPLAY
-	    Display.update();
-	} while (keepGoing && !Display.isCloseRequested());
+            keepGoing = drawFrame(delta);
+            
+            // UPDATE DISPLAY
+            Display.update();
+            Main.aman.update();
 
-	return nextScene();
+            if (Display.isCloseRequested() || doExit)
+            {
+                return false;
+            }
+
+
+        } while (keepGoing);
+
+        return true;
     }
 }
