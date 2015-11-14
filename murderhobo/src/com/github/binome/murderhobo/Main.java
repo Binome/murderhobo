@@ -70,9 +70,10 @@ public class Main {
 		Display.setVSyncEnabled(true);
 
 		// enable 2D textures
-		// Disabled due to bug drawing textureless entitites.
-		// Is re-enabled before drawing something with a texture.
-		// GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		
+		// disable the OpenGL depth test since we're rendering 2D graphics
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
 
 		// set "clear" color
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

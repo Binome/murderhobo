@@ -33,7 +33,7 @@ public class StartMenu extends Scene {
 		nextScene = this;
 
 		Main.aman.play("title-bgm");
-		SoundStore.get().setCurrentMusicVolume(Settings.music_volume);
+		SoundStore.get().setCurrentMusicVolume(Settings.musicVolume);
 
 		initTitle();
 
@@ -89,15 +89,15 @@ public class StartMenu extends Scene {
 	}
 
 	private void initTitle() {
-		title = new Fixture(768, "res/title/Murderhobo.png");
+		title = new Fixture(1024, 128, "res/title/Murderhobo.png");
 		title.setLoc((Settings.SCR_WIDTH - title.getWidth()) / 2, (int) (.05 * Settings.SCR_HEIGHT));
 		fixtures.add(title);
 
-		playGame = new Fixture(287, "res/title/PLAY-GAME.png");
+		playGame = new Fixture(256, 32, "res/title/PLAY-GAME.png");
 		playGame.setLoc((Settings.SCR_WIDTH - playGame.getWidth()) / 2, (int) (.5 * Settings.SCR_HEIGHT));
 		fixtures.add(playGame);
 
-		quit = new Fixture(155, "res/title/QUIT.png");
+		quit = new Fixture(128, 32, "res/title/QUIT.png");
 		quit.setLoc((Settings.SCR_WIDTH - quit.getWidth()) / 2,
 				(int) (.5 * Settings.SCR_HEIGHT) + playGame.getHeight() + 25);
 		fixtures.add(quit);

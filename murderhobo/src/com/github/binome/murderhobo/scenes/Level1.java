@@ -41,6 +41,9 @@ public class Level1 extends Scene {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, Settings.SCR_WIDTH, Settings.SCR_HEIGHT, 0, 1, -1);
+		//GL11.glOrtho(ourHero.getX() - scale, ourHero.getX() + scale,
+		//		ourHero.getY() + scale, ourHero.getY() - scale,
+		//		1,-1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 
