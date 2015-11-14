@@ -4,31 +4,28 @@ import com.github.binome.murderhobo.entities.Tile;
 
 public class Cell {
 
-	private int x,y;
-	private Tile tile;
-	
-	public Cell(int x, int y, Tile tile) {
-		super();
+	private int x, y;
+	private Tile t;
+
+	public Cell(int x, int y, Tile t) {
 		this.x = x;
 		this.y = y;
-		this.tile = tile;
+		this.t = t;
 	}
 
 	public Tile getTile() {
-		return tile;
+		return t;
 	}
 
 	public void setTile(Tile tile) {
-		this.tile = tile;
+		this.t = tile;
 	}
 
-	public int getX()
-	{
+	public int getX() {
 		return x;
 	}
-	
-	public int getY()
-	{
+
+	public int getY() {
 		return y;
 	}
 }

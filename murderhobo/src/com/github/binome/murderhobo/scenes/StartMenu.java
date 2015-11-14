@@ -3,12 +3,10 @@ package com.github.binome.murderhobo.scenes;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.github.binome.murderhobo.Main;
@@ -80,7 +78,8 @@ public class StartMenu extends Scene {
 						done = true;
 					}
 					if (playGame.getHitBox().contains(p)) {
-						//TODO Go to Level 1
+						nextScene = new Level1();
+						done = true;
 					}
 				}
 			}
@@ -99,13 +98,13 @@ public class StartMenu extends Scene {
 
 		quit = new Fixture(128, 32, "res/title/QUIT.png");
 		quit.setLoc((Settings.SCR_WIDTH - quit.getWidth()) / 2,
-				(int) (.5 * Settings.SCR_HEIGHT) + playGame.getHeight() + 25);
+				(int) (.5 * Settings.SCR_HEIGHT) + playGame.getHeight() + 48);
 		fixtures.add(quit);
 		// System.out.println(quit.getX()+" "+quit.getX()+quit.getWidth()+"
 		// "+quit.getY()+" "+quit.getY()+quit.getHeight());
 	}
 
-	protected Scene nextScene() {
+	public Scene nextScene() {
 		return nextScene;
 	}
 

@@ -1,43 +1,49 @@
 package com.github.binome.murderhobo.entities;
 
+import org.newdawn.slick.SpriteSheet;
 
 public class Tile extends Fixture {
 
 	private boolean isPassable;
-	private enum TileType {NWALL}
-	private TileType type;
-	
+
 	private String pngPath;
 	private int texX;
 	private int texY;
-	
-	
-	
-	public Tile(int boxWidth, String pngpath, int xTexOffset, int texWidth, int yTexOffset, int texHeight) {
-		super(32,32,pngpath, xTexOffset, texWidth, yTexOffset, texHeight);
-		this.type=type;
-		decodeType(type);
-		this.isPassable = isPassable;
+
+	public Tile(TileType t) {
+		super(32, 32, t.getPath(), t.getTexX(), 16, t.getTexY(), 16);
 	}
 
 	public boolean isPassable() {
 		return isPassable;
 	}
-	
-	public String decodeType(TileType type){
-		String path = null;
-		
-		switch (type) {
-			case NWALL:
-				path = "res/dawnlike/Objects/Wall.png";
-				texX = 16;
-				texY = 49;
-				break;
-			default:
-				break;
+
+	public enum TileType {		
+		FLOOR("res/dawnlike/Objects/Floor.png", 17, 112);
+
+		private String path;
+		private int texX;
+		private int texY;
+
+
+		TileType(String path, int texX, int texY) {
+			this.path = path;
+			this.texX = texX;
+			this.texY = texY;
 		}
-		
-		
-		return path;
+
+		public String getPath() {
+			return path;
+		}
+
+		public int getTexX() {
+			return texX;
+		}
+
+		public int getTexY() {
+			return texY;
+		}
+
 	}
+
 }

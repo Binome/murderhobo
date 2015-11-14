@@ -13,7 +13,7 @@ public abstract class Scene
     public abstract boolean drawFrame(float delta);
 
     // null typically means Game should load menu
-    protected Scene nextScene() { return null; }
+    public Scene nextScene() { return null; }
 
     protected void exit()
     {

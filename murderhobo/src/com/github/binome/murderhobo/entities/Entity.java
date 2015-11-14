@@ -54,10 +54,10 @@ public abstract class Entity {
 			texWidth  = width;
 			texHeight = height;
 			
-			normalizedTexX = (float) xTexOffset/texture.getImageWidth();
-			normalizedTexY = (float) yTexOffset/texture.getImageHeight();
-			normalizedTexWidth = (float) texWidth/texture.getImageWidth();
-			normalizedTexHeight = (float) texHeight/texture.getImageHeight();
+			normalizedTexX = (float) xTexOffset/ (float) texture.getImageWidth();
+			normalizedTexY = (float) yTexOffset/(float) texture.getImageHeight();
+			normalizedTexWidth = (float) texWidth/(float) texture.getImageWidth();
+			normalizedTexHeight = (float) texHeight/(float) texture.getImageHeight();
 			
 			boxColor = new Color(1,1,1);
 			hasTex = true;
@@ -80,10 +80,15 @@ public abstract class Entity {
 			this.texWidth = texWidth;
 			this.texHeight = texHeight;
 			
-			normalizedTexX = (float) xTexOffset/texture.getImageWidth();
-			normalizedTexY = (float) yTexOffset/texture.getImageHeight();
-			normalizedTexWidth = (float) texWidth/texture.getImageWidth();
-			normalizedTexHeight = (float) texHeight/texture.getImageHeight();
+			System.out.println(xTexOffset + " " + yTexOffset + " " + texWidth + " " +texHeight);
+			
+			normalizedTexX = (float) xTexOffset/(float) texture.getImageWidth();
+			normalizedTexY = (float) yTexOffset/(float) texture.getImageHeight();
+			normalizedTexWidth = (float) texWidth/(float) texture.getImageWidth();
+			normalizedTexHeight = (float) texHeight/(float) texture.getImageHeight();
+			
+			System.out.println(normalizedTexX + " " + normalizedTexY + " " + normalizedTexWidth + " " + normalizedTexHeight);
+
 			
 			boxColor = new Color(1, 1, 1);
 			hasTex = true;
