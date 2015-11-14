@@ -2,7 +2,7 @@ package com.github.binome.murderhobo.entities;
 
 import org.lwjgl.util.Color;
 
-public class Fixture extends Entity {
+public class Fixture extends SimpleEntity {
 
 	public Fixture(int width, int height, String pngpath) {
 		super(width, height, pngpath);
@@ -16,8 +16,4 @@ public class Fixture extends Entity {
 		super(x, y, width, height, c);
 	}
 
-	public Fixture(int boxWidth, int boxHeight, String pngpath, int xTexOffset, int texWidth, int yTexOffset, int texHeight) {
-		super(boxWidth, boxHeight, pngpath, xTexOffset, texWidth, yTexOffset, texHeight);
-	}
-	
 }

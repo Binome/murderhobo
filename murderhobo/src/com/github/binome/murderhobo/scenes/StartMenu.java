@@ -18,8 +18,6 @@ public class StartMenu extends Scene {
 	private Fixture playGame;
 	private Fixture quit;
 
-	private boolean done = false;
-
 	protected LinkedList<Fixture> fixtures = new LinkedList<Fixture>();
 
 	private Scene nextScene;
@@ -53,9 +51,6 @@ public class StartMenu extends Scene {
 		drawTitle();
 		checkInput();
 
-		if (!done)
-			return true;
-		else
 			return false;
 	}
 
@@ -75,11 +70,10 @@ public class StartMenu extends Scene {
 
 					if (quit.getHitBox().contains(p)) {
 						// System.out.println("Clicked quit.");
-						done = true;
+						exit();
 					}
 					if (playGame.getHitBox().contains(p)) {
 						nextScene = new Level1();
-						done = true;
 					}
 				}
 			}

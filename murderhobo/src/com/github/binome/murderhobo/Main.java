@@ -49,7 +49,7 @@ public class Main {
                 currScene = menu;
             }
 
-            System.out.println("Changing Scene: " + currScene);
+            //System.out.println("Changing Scene: " + currScene);
         }
 		
 		Display.destroy();
@@ -110,5 +110,6 @@ public class Main {
 	public static void initSprites() throws SlickException
 	{
 		spriteMan = SpriteManager.getInstance();
+		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
 	}
 }

@@ -11,8 +11,6 @@ import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Settings;
 import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.entities.Fixture;
-import com.github.binome.murderhobo.entities.Tile;
-import com.github.binome.murderhobo.entities.Tile.TileType;
 
 public class Level1 extends Scene {
 	protected LinkedList<Fixture> fixtures = new LinkedList<Fixture>();
@@ -62,33 +60,22 @@ public class Level1 extends Scene {
 	}
 
 	private void populateGrid(){
-		HashMap<String,Tile> tiles = createTiles();
 		
 		for (int i = 0; i < CELLS_WIDE; i++){
 			for (int j = 0; j < CELLS_TALL; j++){
-				grid[i][j] = new Cell(i, j, tiles.get("nWall"));
+				grid[i][j] = new Cell(i, j, Cell.TileType.FLOOR);
 			}
 		}
-	}
-	
-	private HashMap<String, Tile> createTiles(){
-		HashMap<String,Tile> tiles = new HashMap<String,Tile>();
-		
-		tiles.put("nWall", new Tile(TileType.FLOOR));
-		
-		return tiles;
 	}
 	
 	private void drawGrid(){
-		grid[0][0].getTile().setLoc(0, 0);
-		grid[0][0].getTile().draw();
-		/**
+		int xLoc, yLoc;
 		for (int i = 0; i < CELLS_WIDE; i++){
+			xLoc=i*Settings.GRID_SIZE;
 			for (int j = 0; j < CELLS_TALL; j++){
-				grid[i][j].getTile().setLoc(i*Settings.TILE_SIZE, j*Settings.TILE_SIZE);;
-				grid[i][j].getTile().draw();
+				yLoc=j*Settings.GRID_SIZE;
+				grid[0][0].getImage().draw(xLoc, yLoc, Settings.TILE_SIZE, Settings.TILE_SIZE);
 			}
 		}
-		**/
 	}
 }
