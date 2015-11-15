@@ -43,13 +43,23 @@ public class Cell extends Entity {
 
 		NWALL(Main.spriteMan.get("wall").getSprite(8,15), false),
 		SWALL(Main.spriteMan.get("wall").getSprite(11,17), false),
-		EWALL(Main.spriteMan.get("wall").getSprite(7,16).getFlippedCopy(true, false), false),
+		EWALL(Main.spriteMan.get("wall").getSprite(7,16), false),
 		WWALL(Main.spriteMan.get("wall").getSprite(7,16), false),
 		
 		NWWALL(Main.spriteMan.get("wall").getSprite(7,15), false),
-		NEWALL(Main.spriteMan.get("wall").getSprite(7,15).getFlippedCopy(true, false), false),
+		NEWALL(Main.spriteMan.get("wall").getSprite(9,15), false),
 		SWWALL(Main.spriteMan.get("wall").getSprite(7,17), false),
-		SEWALL(Main.spriteMan.get("wall").getSprite(9,17), false);
+		SEWALL(Main.spriteMan.get("wall").getSprite(9,17), false),
+
+		INNER_NWWALL(Main.spriteMan.get("wall").getSprite(0,12),false),
+		INNER_NEWALL(Main.spriteMan.get("wall").getSprite(2,12),false),
+		INNER_SEWALL(Main.spriteMan.get("wall").getSprite(2,14),false),
+		INNER_SWWALL(Main.spriteMan.get("wall").getSprite(0,14),false),
+
+		INNER_NWALL(Main.spriteMan.get("wall").getSprite(1,12),false),
+		INNER_EWALL(Main.spriteMan.get("wall").getSprite(0,13),false),
+		INNER_SWALL(Main.spriteMan.get("wall").getSprite(1,12),false),
+		INNER_WWALL(Main.spriteMan.get("wall").getSprite(0,13),false);
 
 		private final Image i;
 		private boolean passable;

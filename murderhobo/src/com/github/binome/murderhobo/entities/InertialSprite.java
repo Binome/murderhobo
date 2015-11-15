@@ -16,6 +16,5 @@ public class InertialSprite extends SpriteEntity {
 	public void update(float delta) {
 		hitBox.setX((int) (hitBox.getX() + velocity.getX() * delta));
 		hitBox.setY((int) (hitBox.getY() + velocity.getY() * delta));
-
 	}
 }

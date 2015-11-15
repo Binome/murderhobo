@@ -55,16 +55,18 @@ public class Hero extends InertialSprite {
 		}
 
 		tweakSpeed();
-		
+
 		super.update(delta);
 
 		ArrayList<Cell> in = inCells();
 		Iterator<Cell> it = in.iterator();
 		Cell c;
+		Rectangle r = null;
 		while (it.hasNext()) {
 			c = it.next();
 			if (!c.passable) {
 				{
+
 					if (oldY + ourHero.getHeight() <= c.getHitBox().getY()) {
 						ourHero.setLoc(ourHero.getX(), c.getHitBox().getY() - ourHero.getHeight());
 						ourHero.velocity.setY(0.0f);
@@ -75,6 +77,7 @@ public class Hero extends InertialSprite {
 							ourHero.velocity.setY(0.0f);
 						}
 					}
+
 					if (oldX + ourHero.getWidth() <= c.getHitBox().getX()) {
 						ourHero.setLoc(oldX, ourHero.getY());
 						if (ourHero.velocity.getX() > 0.0f) {
@@ -87,6 +90,7 @@ public class Hero extends InertialSprite {
 							ourHero.velocity.setX(0.0f);
 						}
 					}
+
 				}
 			}
 		}
@@ -116,8 +120,8 @@ public class Hero extends InertialSprite {
 
 		return cellList;
 	}
-	
-	private void tweakSpeed(){
+
+	private void tweakSpeed() {
 		// enforce speed limit
 		if (Math.abs(velocity.getX()) > maxSpeed) {
 			if (velocity.getX() > 0) {
@@ -135,17 +139,25 @@ public class Hero extends InertialSprite {
 		}
 
 		// apply friction
-		if (velocity.getX() > 0) {
+		if (velocity.getX() > 0.0f) {
 			Vector2f.add(velocity, new Vector2f(-1 * friction, 0), velocity);
 		}
-		if (velocity.getX() < 0) {
+		if (velocity.getX() < 0.0f) {
 			Vector2f.add(velocity, new Vector2f(friction, 0), velocity);
 		}
-		if (velocity.getY() > 0) {
+		if (velocity.getY() > 0.0f) {
 			Vector2f.add(velocity, new Vector2f(0, -1 * friction), velocity);
 		}
-		if (velocity.getY() < 0) {
+		if (velocity.getY() < 0.0f) {
 			Vector2f.add(velocity, new Vector2f(0, friction), velocity);
+		}
+		
+		//stop "creep" from friction bouncing back and forth between positive and negative
+		if (Math.abs((float)velocity.getX()) < friction){
+			velocity.setX(0.0f);
+		}
+		if (Math.abs((float)velocity.getY()) < friction){
+			velocity.setY(0.0f);
 		}
 	}
 }

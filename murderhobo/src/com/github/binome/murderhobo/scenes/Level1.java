@@ -98,6 +98,29 @@ public class Level1 extends Level {
 			}
 		}
 		
+		// first room
+		grid[6][6].setTileType(Cell.TileType.INNER_NWWALL);
+		grid[7][6].setTileType(Cell.TileType.INNER_NWALL);
+		grid[8][6].setTileType(Cell.TileType.INNER_NWALL);
+		grid[9][6].setTileType(Cell.TileType.INNER_NWALL);
+		grid[10][6].setTileType(Cell.TileType.INNER_NWALL);
+		grid[11][6].setTileType(Cell.TileType.INNER_NWALL);
+		grid[13][6].setTileType(Cell.TileType.INNER_NEWALL);
+		grid[13][7].setTileType(Cell.TileType.INNER_EWALL);
+		grid[13][8].setTileType(Cell.TileType.INNER_EWALL);
+		grid[13][9].setTileType(Cell.TileType.INNER_EWALL);
+		grid[13][10].setTileType(Cell.TileType.INNER_EWALL);
+		grid[13][11].setTileType(Cell.TileType.INNER_SEWALL);
+		grid[12][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[11][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[10][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[8][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[7][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[6][11].setTileType(Cell.TileType.INNER_SWWALL);
+		grid[6][10].setTileType(Cell.TileType.INNER_WWALL);
+		grid[6][8].setTileType(Cell.TileType.INNER_WWALL);
+		grid[6][7].setTileType(Cell.TileType.INNER_WWALL);
+		
 		
 	}
 
