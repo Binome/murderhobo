@@ -10,7 +10,7 @@ import org.lwjgl.util.Point;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.github.binome.murderhobo.Main;
-import com.github.binome.murderhobo.Settings;
+import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.entities.Fixture;
 
 public class StartMenu extends Scene {
@@ -29,7 +29,7 @@ public class StartMenu extends Scene {
 		nextScene = this;
 
 		Main.aman.play("title-bgm");
-		SoundStore.get().setCurrentMusicVolume(Settings.musicVolume);
+		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 
 		initTitle();
 
@@ -45,7 +45,7 @@ public class StartMenu extends Scene {
 		GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, Settings.SCR_WIDTH, Settings.SCR_HEIGHT, 0, 1, -1);
+		GL11.glOrtho(0, Reference.SCR_WIDTH, Reference.SCR_HEIGHT, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 		drawTitle();
@@ -83,16 +83,16 @@ public class StartMenu extends Scene {
 
 	private void initTitle() {
 		title = new Fixture(1024, 128, "res/title/Murderhobo.png");
-		title.setLoc((Settings.SCR_WIDTH - title.getWidth()) / 2, (int) (.05 * Settings.SCR_HEIGHT));
+		title.setLoc((Reference.SCR_WIDTH - title.getWidth()) / 2, (int) (.05 * Reference.SCR_HEIGHT));
 		fixtures.add(title);
 
 		playGame = new Fixture(256, 32, "res/title/PLAY-GAME.png");
-		playGame.setLoc((Settings.SCR_WIDTH - playGame.getWidth()) / 2, (int) (.5 * Settings.SCR_HEIGHT));
+		playGame.setLoc((Reference.SCR_WIDTH - playGame.getWidth()) / 2, (int) (.5 * Reference.SCR_HEIGHT));
 		fixtures.add(playGame);
 
 		quit = new Fixture(128, 32, "res/title/QUIT.png");
-		quit.setLoc((Settings.SCR_WIDTH - quit.getWidth()) / 2,
-				(int) (.5 * Settings.SCR_HEIGHT) + playGame.getHeight() + 48);
+		quit.setLoc((Reference.SCR_WIDTH - quit.getWidth()) / 2,
+				(int) (.5 * Reference.SCR_HEIGHT) + playGame.getHeight() + 48);
 		fixtures.add(quit);
 		// System.out.println(quit.getX()+" "+quit.getX()+quit.getWidth()+"
 		// "+quit.getY()+" "+quit.getY()+quit.getHeight());

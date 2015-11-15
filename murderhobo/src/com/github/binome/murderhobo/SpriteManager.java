@@ -1,6 +1,5 @@
 package com.github.binome.murderhobo;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 import org.newdawn.slick.SlickException;

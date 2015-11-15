@@ -3,12 +3,14 @@ package com.github.binome.murderhobo.map;
 import org.newdawn.slick.Image;
 
 import com.github.binome.murderhobo.Main;
+import com.github.binome.murderhobo.Reference;
+import com.github.binome.murderhobo.entities.Entity;
 
-public class Cell {
+public class Cell extends Entity {
 
 	private int x, y;
 	private Image i;
-	private boolean passable;
+	public boolean passable;
 
 	public Cell(int x, int y, TileType t) {
 		this.x = x;
@@ -34,7 +36,18 @@ public class Cell {
 	
 
 	public enum TileType {
-		FLOOR(Main.spriteMan.get("floor").getSprite(1, 7), true);
+		ERROR_TEX(Main.spriteMan.get("floor").getSprite(13, 1),false),
+		FLOOR(Main.spriteMan.get("floor").getSprite(1, 7), true),
+
+		NWALL(Main.spriteMan.get("wall").getSprite(8,15), false),
+		SWALL(Main.spriteMan.get("wall").getSprite(11,17), false),
+		WWALL(Main.spriteMan.get("wall").getSprite(7,16).getFlippedCopy(true, false), false),
+		EWALL(Main.spriteMan.get("wall").getSprite(7,16), false),
+		
+		NWWALL(Main.spriteMan.get("wall").getSprite(7,15), false),
+		NEWALL(Main.spriteMan.get("wall").getSprite(9,15), false),
+		SWWALL(Main.spriteMan.get("wall").getSprite(7,17), false),
+		SEWALL(Main.spriteMan.get("wall").getSprite(9,17), false);
 
 		private final Image i;
 		private boolean passable;
@@ -43,5 +56,15 @@ public class Cell {
 			this.i = i;
 			this.passable = passable;
 		}
+	}
+
+
+	public void update(float delta) {	}
+
+	@Override
+	public void draw() {
+		int xLoc= x * Reference.GRID_SIZE;
+		int yLoc= y * Reference.GRID_SIZE;
+		i.draw(xLoc, yLoc, Reference.TILE_SIZE, Reference.TILE_SIZE);
 	}
 }

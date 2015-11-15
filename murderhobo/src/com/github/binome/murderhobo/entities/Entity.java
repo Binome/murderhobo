@@ -26,12 +26,9 @@ public abstract class Entity {
 
 	}
 
-	public void update(float delta) {
+	public abstract void update(float delta);
 
-	}
-
-	public void draw() {
-	}
+	public abstract void draw();
 
 	public boolean testCollision(Entity e) {
 		if (hitBox.intersects(e.hitBox))

@@ -1,6 +1,6 @@
 package com.github.binome.murderhobo;
 
-public class Settings {
+public class Reference {
 	public static final int TARGET_FPS = 100;
 	public static final int TILE_SIZE=32;
 

@@ -78,11 +78,9 @@ public abstract class SimpleEntity extends Entity {
 	}
 
 	public void destroy() {
-
 	}
 
 	public void update(float delta) {
-
 	}
 
 	public void draw() {

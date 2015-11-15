@@ -32,7 +32,7 @@ public class Main {
 	 * @throws SlickException 
 	 */
 	public static void main(String[] args) throws LWJGLException, IOException, SlickException {
-		initGL(Settings.SCR_WIDTH, Settings.SCR_HEIGHT);
+		initGL(Reference.SCR_WIDTH, Reference.SCR_HEIGHT);
 		initAudio();
 		initSprites();
 
@@ -110,6 +110,9 @@ public class Main {
 	public static void initSprites() throws SlickException
 	{
 		spriteMan = SpriteManager.getInstance();
+		
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
+		spriteMan.loadSpriteSheet("wall", "res/dawnlike/Objects/Wall.png");
+		spriteMan.loadSpriteSheet("hero", "res/antifarea/ranger_f.png",32,36);
 	}
 }
