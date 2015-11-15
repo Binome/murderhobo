@@ -1,5 +1,6 @@
 package com.github.binome.murderhobo.map;
 
+import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.Image;
 
 import com.github.binome.murderhobo.Main;
@@ -17,6 +18,7 @@ public class Cell extends Entity {
 		this.y = y;
 		i = t.i;
 		passable = t.passable;
+		hitBox = new Rectangle(x*Reference.GRID_SIZE, y*Reference.GRID_SIZE, Reference.GRID_SIZE, Reference.GRID_SIZE);
 	}
 
 	public Image getImage() { return i; }
@@ -41,11 +43,11 @@ public class Cell extends Entity {
 
 		NWALL(Main.spriteMan.get("wall").getSprite(8,15), false),
 		SWALL(Main.spriteMan.get("wall").getSprite(11,17), false),
-		WWALL(Main.spriteMan.get("wall").getSprite(7,16).getFlippedCopy(true, false), false),
-		EWALL(Main.spriteMan.get("wall").getSprite(7,16), false),
+		EWALL(Main.spriteMan.get("wall").getSprite(7,16).getFlippedCopy(true, false), false),
+		WWALL(Main.spriteMan.get("wall").getSprite(7,16), false),
 		
 		NWWALL(Main.spriteMan.get("wall").getSprite(7,15), false),
-		NEWALL(Main.spriteMan.get("wall").getSprite(9,15), false),
+		NEWALL(Main.spriteMan.get("wall").getSprite(7,15).getFlippedCopy(true, false), false),
 		SWWALL(Main.spriteMan.get("wall").getSprite(7,17), false),
 		SEWALL(Main.spriteMan.get("wall").getSprite(9,17), false);
 

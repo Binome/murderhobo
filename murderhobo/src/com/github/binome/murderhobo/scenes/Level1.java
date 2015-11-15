@@ -7,7 +7,6 @@ import org.newdawn.slick.openal.SoundStore;
 import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.map.Cell;
-import com.github.binome.murderhobo.map.Cell.TileType;
 import com.github.binome.murderhobo.entities.Hero;
 
 public class Level1 extends Level {
@@ -16,7 +15,7 @@ public class Level1 extends Level {
 	private int xScale = 400;
 	private int yScale = 300;
 
-	private Cell[][] grid;
+	public Cell[][] grid;
 
 	private Scene nextScene;
 
@@ -35,7 +34,7 @@ public class Level1 extends Level {
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
 		createGrid();
-		Hero.getInstance(this).setLoc(32, 32);
+		Hero.getInstance(grid).setLoc(64, 64);
 
 		// TODO Place entities
 	}
@@ -49,14 +48,14 @@ public class Level1 extends Level {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		// GL11.glOrtho(0, Settings.SCR_WIDTH, Settings.SCR_HEIGHT, 0, 1, -1);
-		GL11.glOrtho(Hero.getInstance(this).getX() - xScale, Hero.getInstance(this).getX() + xScale,
-				Hero.getInstance(this).getY() + yScale, Hero.getInstance(this).getY() - yScale, 1, -1);
+		GL11.glOrtho(Hero.getInstance(grid).getX() - xScale, Hero.getInstance(grid).getX() + xScale,
+				Hero.getInstance(grid).getY() + yScale, Hero.getInstance(grid).getY() - yScale, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 		drawGrid();
 
-		Hero.getInstance(this).update(delta);
-		Hero.getInstance(this).draw();
+		Hero.getInstance(grid).update(delta,grid);
+		Hero.getInstance(grid).draw();
 
 		return true;
 	}
@@ -78,15 +77,28 @@ public class Level1 extends Level {
 
 		// west wall
 		for (int i = 1;i < CELLS_TALL-1; i++){
-			
+			grid[0][i].setTileType(Cell.TileType.WWALL);
 		}
-		
-		//floor
+		// east wall
+		for (int i = 1;i < CELLS_TALL-1; i++){
+			grid[CELLS_WIDE-1][i].setTileType(Cell.TileType.EWALL);
+		}
+		// north wall
+		for (int i = 1;i < CELLS_WIDE-1; i++){
+			grid[i][0].setTileType(Cell.TileType.NWALL);
+		}
+		// south wall
+		for (int i = 1;i < CELLS_WIDE-1; i++){
+			grid[i][CELLS_TALL-1].setTileType(Cell.TileType.NWALL);
+		}
+		// floor
 		for (int i = 1; i < CELLS_WIDE - 1; i++) {
 			for (int j = 1; j < CELLS_TALL - 1; j++) {
 				grid[i][j] = new Cell(i, j, Cell.TileType.FLOOR);
 			}
 		}
+		
+		
 	}
 
 	private void drawGrid() {

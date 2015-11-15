@@ -4,7 +4,7 @@ import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.Image;
 
 public class SpriteEntity extends Entity {
-	private Image img;
+	protected Image img;
 	
 	public SpriteEntity(int width, int height, Image i) {
 		hitBox = new Rectangle(0, 0, width, height);
@@ -17,7 +17,6 @@ public class SpriteEntity extends Entity {
 
 	@Override
 	public void update(float delta) {
-		// TODO Auto-generated method stub
 		
 	}
 

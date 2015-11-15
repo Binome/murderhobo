@@ -1,11 +1,6 @@
 package com.github.binome.murderhobo.entities;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
-import org.lwjgl.util.Color;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 public abstract class Entity {
 
@@ -19,13 +14,6 @@ public abstract class Entity {
 		hitBox.setY(y);
 	}
 
-	public void init() {
-	}
-
-	public void destroy() {
-
-	}
-
 	public abstract void update(float delta);
 
 	public abstract void draw();
@@ -35,9 +23,6 @@ public abstract class Entity {
 			return true;
 		else
 			return false;
-	}
-
-	public void onCollision() {
 	}
 
 	public int getX() {
