@@ -1,7 +1,13 @@
 package com.github.binome.murderhobo.entities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
+
+import com.github.binome.murderhobo.map.Cell;
 
 public class Arrow extends InertialSprite {
 	private float drag = 0.01f;
@@ -30,7 +36,8 @@ public class Arrow extends InertialSprite {
 			Vector2f.add(velocity, new Vector2f(0, drag), velocity);
 		}
 		
-		//unmake arrow once it's moving too slowly
+		
+		//unmake arrow if it's moving too slowly
 		if (Math.abs((float)velocity.getX()) < drag  && Math.abs((float)velocity.getY()) < drag){
 			isActive = false;
 		}

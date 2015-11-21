@@ -1,13 +1,18 @@
 package com.github.binome.murderhobo.scenes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
-import com.github.binome.murderhobo.SpriteManager;
 import com.github.binome.murderhobo.map.Cell;
+import com.github.binome.murderhobo.entities.Arrow;
+import com.github.binome.murderhobo.entities.Entity;
 import com.github.binome.murderhobo.entities.Hero;
 
 public class Level1 extends Level {
@@ -15,8 +20,7 @@ public class Level1 extends Level {
 	public final int CELLS_TALL = 40;
 	private int xScale = 400;
 	private int yScale = 300;
-
-
+	
 	//private static Level instance;
 	private Scene nextScene;
 
@@ -42,6 +46,7 @@ public class Level1 extends Level {
 		Main.aman.play("level1-peaceful");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
+		arrows = new LinkedList<Arrow>();
 		createGrid();
 
 		// TODO Place entities
@@ -62,6 +67,35 @@ public class Level1 extends Level {
 
 		drawGrid();
 
+		Entity ent;
+		Iterator<Arrow> arrIt = arrows.iterator();
+		while (arrIt.hasNext())
+		{
+			ent = arrIt.next();
+			ent.update(delta);
+
+			//destroy on impact with wall
+			ArrayList<Cell> in = ent.inCells(this);
+			Iterator<Cell> it = in.iterator();
+			Cell c;
+			while (it.hasNext()) {
+				c = it.next();
+				if (!c.passable) {
+					ent.isActive=false;
+				}
+				}
+			
+			if (! ent.isActive)
+			{
+				//System.out.println("removing inactive entity");
+				arrIt.remove();
+			}
+			else 
+			{
+				ent.draw();
+			}
+		}
+		
 		Hero.getInstance().update(delta, this);
 		Hero.getInstance().draw();
 

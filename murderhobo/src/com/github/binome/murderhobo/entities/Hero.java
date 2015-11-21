@@ -63,17 +63,23 @@ public class Hero extends InertialSprite {
 		//shoot
 		if (Mouse.isButtonDown(0))
 		{
+			//TODO Variable arrow speed
+			float arrowSpeed = 1.0f;
 			float mouseX = getX() + (Mouse.getX() - Reference.SCR_WIDTH / 2);
 			float mouseY = getY() + (Mouse.getY() - Reference.SCR_HEIGHT/ 2);
 			
 			Vector2f vToMouse = new Vector2f(mouseX-getX(),getY()-mouseY);
 			vToMouse.normalise();
+			vToMouse.scale(arrowSpeed);
 			
-			//projectiles.add(new Projectile(5, 5, (Color) Color.WHITE, vToMouse,
-			//		hitBox.getX() + 42, //Align with torch
-			//		hitBox.getY()));
-			//Main.aman.play("zap",0.6f);
+			//TODO figure out which arrow to draw
+			//double angle = Math.atan2(vToMouse.getY(), vToMouse.getX());
+			//System.out.println(angle);
+			Image arrowImg = Main.spriteMan.get("arrowE"); //Make to specific image
+			Arrow arr = new Arrow(arrowImg, vToMouse);
+			arr.setLoc(getX() + getWidth()/2, getY() + getHeight()/2);
 			
+			lvl.addArrow(arr);
 		}
 		
 		tweakSpeed();
@@ -120,30 +126,6 @@ public class Hero extends InertialSprite {
 
 	}
 
-	public ArrayList<Cell> inCells(Level lvl) {
-		Cell[][] grid = lvl.getInstance().getGrid();
-		int lowerX = (int) Math.floor((double) getX() / (double) Reference.GRID_SIZE);
-		int upperX = (int) Math.ceil((double) getX() / (double) Reference.GRID_SIZE);
-		int lowerY = (int) Math.floor((double) getY() / (double) Reference.GRID_SIZE);
-		int upperY = (int) Math.ceil((double) getY() / (double) Reference.GRID_SIZE);
-
-		ArrayList<Cell> cellList = new ArrayList<Cell>();
-
-		if (lowerX >= 0 && lowerY >= 0) {
-			cellList.add(grid[lowerX][lowerY]);
-		}
-		if (upperX <= grid.length && lowerY >= 0) {
-			cellList.add(grid[upperX][lowerY]);
-		}
-		if (upperX <= grid.length && upperY <= grid[0].length) {
-			cellList.add(grid[upperX][upperY]);
-		}
-		if (lowerX >= 0 && upperY <= grid[0].length) {
-			cellList.add(grid[lowerX][upperY]);
-		}
-
-		return cellList;
-	}
 
 	private void tweakSpeed() {
 		// enforce speed limit
