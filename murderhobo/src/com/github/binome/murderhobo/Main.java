@@ -104,6 +104,8 @@ public class Main {
 		aman.loadLoop("title-bgm", "res/audio/music/8bit.ogg");
 		aman.loadLoop("level1-peaceful", "res/audio/music/Dungeon_Crawl.ogg");
 		aman.loadLoop("level1-murder", "res/audio/music/Dungeon_Boss.ogg");
+		
+		aman.loadSample("shoot", "res/audio/sfx/shoot.wav");
 
 	}
 	
@@ -114,5 +116,7 @@ public class Main {
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
 		spriteMan.loadSpriteSheet("wall", "res/dawnlike/Objects/Wall.png");
 		spriteMan.loadSpriteSheet("hero", "res/antifarea/ranger_f.png",32,36);
+		spriteMan.loadSpriteSheet("arrowE", "res/arrowR.png");
+		spriteMan.loadSpriteSheet("arrowNE", "res/arrowNE.png");
 	}
 }

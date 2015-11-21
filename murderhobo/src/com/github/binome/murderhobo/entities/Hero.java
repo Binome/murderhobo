@@ -2,7 +2,10 @@ package com.github.binome.murderhobo.entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
@@ -10,24 +13,27 @@ import org.newdawn.slick.Image;
 import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.map.Cell;
+import com.github.binome.murderhobo.scenes.Level;
+import com.github.binome.murderhobo.scenes.Level1;
 
 public class Hero extends InertialSprite {
 	private float speed = 0.05f;
 	private float maxSpeed = 0.3f;
 	private float friction = 0.025f;
-	Cell[][] grid;
+	//Cell[][] grid = Level1.getInstance().grid;
 
 	private static Hero ourHero;
 
-	public static Hero getInstance(Cell[][] grid) {
+	private LinkedList<Arrow> arrows = new LinkedList<Arrow>();
+	
+	public static Hero getInstance() {
 		if (ourHero == null)
-			ourHero = new Hero(32, 32, Main.spriteMan.get("hero").getSprite(1, 2), grid);
+			ourHero = new Hero(32, 32, Main.spriteMan.get("hero").getSprite(1, 2));
 		return ourHero;
 	}
 
-	public Hero(int width, int height, Image i, Cell[][] grid) {
+	public Hero(int width, int height, Image i) {
 		super(width, height, i);
-		this.grid = grid;
 	}
 
 	public void draw() {
@@ -35,12 +41,12 @@ public class Hero extends InertialSprite {
 		img.draw(getX() - 4, getY(), 1.0f);
 	}
 
-	public void update(float delta, Cell[][] grid) {
-		this.grid = grid;
+	public void update(float delta, Level lvl) {
 
 		int oldX = getX();
 		int oldY = getY();
 
+		//movement
 		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Vector2f.add(velocity, new Vector2f(-1 * speed, 0), velocity);
 		}
@@ -54,11 +60,28 @@ public class Hero extends InertialSprite {
 			Vector2f.add(velocity, new Vector2f(0, speed), velocity);
 		}
 
+		//shoot
+		if (Mouse.isButtonDown(0))
+		{
+			float mouseX = getX() + (Mouse.getX() - Reference.SCR_WIDTH / 2);
+			float mouseY = getY() + (Mouse.getY() - Reference.SCR_HEIGHT/ 2);
+			
+			Vector2f vToMouse = new Vector2f(mouseX-getX(),getY()-mouseY);
+			vToMouse.normalise();
+			
+			//projectiles.add(new Projectile(5, 5, (Color) Color.WHITE, vToMouse,
+			//		hitBox.getX() + 42, //Align with torch
+			//		hitBox.getY()));
+			//Main.aman.play("zap",0.6f);
+			
+		}
+		
 		tweakSpeed();
 
 		super.update(delta);
 
-		ArrayList<Cell> in = inCells();
+		//Check wall collision
+		ArrayList<Cell> in = inCells(lvl.getInstance());
 		Iterator<Cell> it = in.iterator();
 		Cell c;
 		Rectangle r = null;
@@ -97,7 +120,8 @@ public class Hero extends InertialSprite {
 
 	}
 
-	public ArrayList<Cell> inCells() {
+	public ArrayList<Cell> inCells(Level lvl) {
+		Cell[][] grid = lvl.getInstance().getGrid();
 		int lowerX = (int) Math.floor((double) getX() / (double) Reference.GRID_SIZE);
 		int upperX = (int) Math.ceil((double) getX() / (double) Reference.GRID_SIZE);
 		int lowerY = (int) Math.floor((double) getY() / (double) Reference.GRID_SIZE);
@@ -159,5 +183,9 @@ public class Hero extends InertialSprite {
 		if (Math.abs((float)velocity.getY()) < friction){
 			velocity.setY(0.0f);
 		}
+	}
+	
+	public void addArrow(Arrow a){
+		arrows.add(a);
 	}
 }
