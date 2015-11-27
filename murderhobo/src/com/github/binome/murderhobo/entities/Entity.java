@@ -12,8 +12,9 @@ public abstract class Entity {
 
 	protected Rectangle hitBox;
 	public boolean isActive = true;
-	
-	protected Entity(){}
+
+	protected Entity() {
+	}
 
 	public void setLoc(int x, int y) {
 		hitBox.setX(x);
@@ -50,7 +51,7 @@ public abstract class Entity {
 	public Rectangle getHitBox() {
 		return hitBox;
 	}
-	
+
 	public ArrayList<Cell> inCells(Level lvl) {
 		Cell[][] grid = lvl.getInstance().getGrid();
 		int lowerX = (int) Math.floor((double) getX() / (double) Reference.GRID_SIZE);
@@ -75,5 +76,18 @@ public abstract class Entity {
 
 		return cellList;
 	}
+
+	// ***DOESN'T WORK
+	//public void moveToCell(int x, int y, Level lvl) {
+	//	if (x < 0 || y < 0 || x >= lvl.CELLS_WIDE || y >= lvl.CELLS_TALL) {
+	//		System.out.println("Entity not moved. No cell at " + x + " " + y);
+	//		System.out.println("Level is only " + lvl.CELLS_WIDE + " cells wide and " + lvl.CELLS_TALL + " cells tall.");
+	//		return;
+	//	} else {
+	//		hitBox.setLocation(x * Reference.GRID_SIZE, y * Reference.GRID_SIZE);
+	//	}
+	//	return;
+	//
+	//}
 
 }

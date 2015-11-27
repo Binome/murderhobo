@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.util.Rectangle;
+//import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
 
@@ -14,18 +14,18 @@ import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.scenes.Level;
-import com.github.binome.murderhobo.scenes.Level1;
 
 public class Hero extends InertialSprite {
 	private float speed = 0.05f;
 	private float maxSpeed = 0.3f;
 	private float friction = 0.025f;
-	//Cell[][] grid = Level1.getInstance().grid;
+	// Cell[][] grid = Level1.getInstance().grid;
+	private float arrowCharge = 0;
 
 	private static Hero ourHero;
 
 	private LinkedList<Arrow> arrows = new LinkedList<Arrow>();
-	
+
 	public static Hero getInstance() {
 		if (ourHero == null)
 			ourHero = new Hero(32, 32, Main.spriteMan.get("hero").getSprite(1, 2));
@@ -46,7 +46,7 @@ public class Hero extends InertialSprite {
 		int oldX = getX();
 		int oldY = getY();
 
-		//movement
+		// movement
 		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			Vector2f.add(velocity, new Vector2f(-1 * speed, 0), velocity);
 		}
@@ -60,37 +60,48 @@ public class Hero extends InertialSprite {
 			Vector2f.add(velocity, new Vector2f(0, speed), velocity);
 		}
 
-		//shoot
-		if (Mouse.isButtonDown(0))
-		{
-			//TODO Variable arrow speed
-			float arrowSpeed = 1.0f;
+		// shoot
+		if (Mouse.isButtonDown(0)) {
+			if (arrowCharge == 0) {
+				arrowCharge = 0.03f;
+			} else {
+				arrowCharge = arrowCharge + delta * 0.001f;
+			}
+			if (arrowCharge >= 1.0f) {
+				arrowCharge = 1.0f;
+			}
+		}
+		if (!Mouse.isButtonDown(0) && arrowCharge > 0) {
+			float arrowSpeed = 1.0f * arrowCharge;
 			float mouseX = getX() + (Mouse.getX() - Reference.SCR_WIDTH / 2);
-			float mouseY = getY() + (Mouse.getY() - Reference.SCR_HEIGHT/ 2);
-			
-			Vector2f vToMouse = new Vector2f(mouseX-getX(),getY()-mouseY);
+			float mouseY = getY() + (Mouse.getY() - Reference.SCR_HEIGHT / 2);
+
+			Vector2f vToMouse = new Vector2f(mouseX - getX(), getY() - mouseY);
 			vToMouse.normalise();
 			vToMouse.scale(arrowSpeed);
-			
-			//TODO figure out which arrow to draw
-			//double angle = Math.atan2(vToMouse.getY(), vToMouse.getX());
-			//System.out.println(angle);
-			Image arrowImg = Main.spriteMan.get("arrowE"); //Make to specific image
+
+			// TODO figure out which arrow to draw
+			// double angle = Math.atan2(vToMouse.getY(), vToMouse.getX());
+			// System.out.println(angle);
+			Image arrowImg = Main.spriteMan.get("arrowE"); // Make to specific
+															// image
 			Arrow arr = new Arrow(arrowImg, vToMouse);
-			arr.setLoc(getX() + getWidth()/2, getY() + getHeight()/2);
-			
+			arr.setLoc(getX() + getWidth() / 2, getY() + getHeight() / 2);
+
 			lvl.addArrow(arr);
+			Main.aman.play("shoot");
+			arrowCharge = 0.0f;
 		}
-		
+
 		tweakSpeed();
 
 		super.update(delta);
 
-		//Check wall collision
+		// Check wall collision
 		ArrayList<Cell> in = inCells(lvl.getInstance());
 		Iterator<Cell> it = in.iterator();
 		Cell c;
-		Rectangle r = null;
+		//Rectangle r = null;
 		while (it.hasNext()) {
 			c = it.next();
 			if (!c.passable) {
@@ -126,7 +137,6 @@ public class Hero extends InertialSprite {
 
 	}
 
-
 	private void tweakSpeed() {
 		// enforce speed limit
 		if (Math.abs(velocity.getX()) > maxSpeed) {
@@ -157,17 +167,18 @@ public class Hero extends InertialSprite {
 		if (velocity.getY() < 0.0f) {
 			Vector2f.add(velocity, new Vector2f(0, friction), velocity);
 		}
-		
-		//stop "creep" from friction bouncing back and forth between positive and negative
-		if (Math.abs((float)velocity.getX()) < friction){
+
+		// stop "creep" from friction bouncing back and forth between positive
+		// and negative
+		if (Math.abs((float) velocity.getX()) < friction) {
 			velocity.setX(0.0f);
 		}
-		if (Math.abs((float)velocity.getY()) < friction){
+		if (Math.abs((float) velocity.getY()) < friction) {
 			velocity.setY(0.0f);
 		}
 	}
-	
-	public void addArrow(Arrow a){
+
+	public void addArrow(Arrow a) {
 		arrows.add(a);
 	}
 }

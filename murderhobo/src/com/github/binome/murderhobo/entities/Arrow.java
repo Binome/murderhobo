@@ -1,13 +1,7 @@
 package com.github.binome.murderhobo.entities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Image;
-
-import com.github.binome.murderhobo.map.Cell;
 
 public class Arrow extends InertialSprite {
 	private float drag = 0.01f;

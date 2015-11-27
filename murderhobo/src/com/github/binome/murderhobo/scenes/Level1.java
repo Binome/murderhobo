@@ -14,14 +14,15 @@ import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.entities.Arrow;
 import com.github.binome.murderhobo.entities.Entity;
 import com.github.binome.murderhobo.entities.Hero;
+import com.github.binome.murderhobo.entities.Monster;
 
 public class Level1 extends Level {
 	public final int CELLS_WIDE = 60;
 	public final int CELLS_TALL = 40;
 	private int xScale = 400;
 	private int yScale = 300;
-	
-	//private static Level instance;
+
+	@SuppressWarnings("unused")
 	private Scene nextScene;
 
 	public Level1() {
@@ -30,14 +31,6 @@ public class Level1 extends Level {
 		initLevel();
 
 	}
-	
-	//public static Level getInstance() {
-	//	if (instance == null){
-	//		instance = new Level1();
-	//		Hero.getInstance().setLoc(64, 64);
-	//	}
-	//	return instance;
-	//}
 
 	/**
 	 * Draws the level and places Entities
@@ -47,9 +40,12 @@ public class Level1 extends Level {
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
 		arrows = new LinkedList<Arrow>();
+		monsters = new LinkedList<Monster>();
 		createGrid();
 
-		// TODO Place entities
+		// TODO Place Tiles
+
+		placeEntities();
 	}
 
 	@Override
@@ -69,33 +65,42 @@ public class Level1 extends Level {
 
 		Entity ent;
 		Iterator<Arrow> arrIt = arrows.iterator();
-		while (arrIt.hasNext())
-		{
+		while (arrIt.hasNext()) {
 			ent = arrIt.next();
 			ent.update(delta);
 
-			//destroy on impact with wall
+			// destroy on impact with wall
 			ArrayList<Cell> in = ent.inCells(this);
 			Iterator<Cell> it = in.iterator();
 			Cell c;
 			while (it.hasNext()) {
 				c = it.next();
 				if (!c.passable) {
-					ent.isActive=false;
+					ent.isActive = false;
 				}
-				}
-			
-			if (! ent.isActive)
-			{
-				//System.out.println("removing inactive entity");
-				arrIt.remove();
 			}
-			else 
-			{
+
+			if (!ent.isActive) {
+				// System.out.println("removing inactive entity");
+				arrIt.remove();
+			} else {
 				ent.draw();
 			}
 		}
-		
+
+		Iterator<Monster> monIt = monsters.iterator();
+		while (monIt.hasNext()) {
+			ent = monIt.next();
+			ent.update(delta);
+			
+			if (!ent.isActive) {
+				// System.out.println("removing inactive entity");
+				arrIt.remove();
+			} else {
+				ent.draw();
+			}
+		}
+
 		Hero.getInstance().update(delta, this);
 		Hero.getInstance().draw();
 
@@ -118,20 +123,20 @@ public class Level1 extends Level {
 		grid[0][CELLS_TALL - 1].setTileType(Cell.TileType.SWWALL);
 
 		// west wall
-		for (int i = 1;i < CELLS_TALL-1; i++){
+		for (int i = 1; i < CELLS_TALL - 1; i++) {
 			grid[0][i].setTileType(Cell.TileType.WWALL);
 		}
 		// east wall
-		for (int i = 1;i < CELLS_TALL-1; i++){
-			grid[CELLS_WIDE-1][i].setTileType(Cell.TileType.EWALL);
+		for (int i = 1; i < CELLS_TALL - 1; i++) {
+			grid[CELLS_WIDE - 1][i].setTileType(Cell.TileType.EWALL);
 		}
 		// north wall
-		for (int i = 1;i < CELLS_WIDE-1; i++){
+		for (int i = 1; i < CELLS_WIDE - 1; i++) {
 			grid[i][0].setTileType(Cell.TileType.NWALL);
 		}
 		// south wall
-		for (int i = 1;i < CELLS_WIDE-1; i++){
-			grid[i][CELLS_TALL-1].setTileType(Cell.TileType.NWALL);
+		for (int i = 1; i < CELLS_WIDE - 1; i++) {
+			grid[i][CELLS_TALL - 1].setTileType(Cell.TileType.NWALL);
 		}
 		// floor
 		for (int i = 1; i < CELLS_WIDE - 1; i++) {
@@ -139,7 +144,7 @@ public class Level1 extends Level {
 				grid[i][j] = new Cell(i, j, Cell.TileType.FLOOR);
 			}
 		}
-		
+
 		// first room
 		grid[6][6].setTileType(Cell.TileType.INNER_NWWALL);
 		grid[7][6].setTileType(Cell.TileType.INNER_NWALL);
@@ -159,8 +164,7 @@ public class Level1 extends Level {
 		grid[6][11].setTileType(Cell.TileType.INNER_SWWALL);
 		grid[6][10].setTileType(Cell.TileType.INNER_WWALL);
 		grid[6][7].setTileType(Cell.TileType.INNER_WWALL);
-		
-		
+
 	}
 
 	private void drawGrid() {
@@ -173,12 +177,17 @@ public class Level1 extends Level {
 	}
 
 	public Level getInstance() {
-		if (instance == null){
+		if (instance == null) {
 			instance = new Level1();
 			Hero.getInstance().setLoc(64, 64);
 		}
 		return instance;
 	}
-	
 
+	private void placeEntities() {
+		Monster mon1 = new Monster();
+		mon1.setLoc(12*Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
+		monsters.add(mon1);
+
+	}
 }

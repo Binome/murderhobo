@@ -115,8 +115,11 @@ public class Main {
 		
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
 		spriteMan.loadSpriteSheet("wall", "res/dawnlike/Objects/Wall.png");
+		
 		spriteMan.loadSpriteSheet("hero", "res/antifarea/ranger_f.png",32,36);
 		spriteMan.loadSpriteSheet("arrowE", "res/arrowR.png");
 		spriteMan.loadSpriteSheet("arrowNE", "res/arrowNE.png");
+		
+		spriteMan.loadSpriteSheet("monster", "res/antifarea/monster.png",32,36);
 	}
 }
