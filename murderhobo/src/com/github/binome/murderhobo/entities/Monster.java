@@ -18,6 +18,7 @@ public class Monster extends SpriteEntity {
 	}
 	
 	public void update(float delta){
+		//Idle animation until hostility has been triggered
 		if (!hostile){
 			idleCount += delta;
 			if (idleCount <= Reference.IDLE_CYCLE){
@@ -27,6 +28,9 @@ public class Monster extends SpriteEntity {
 			} else {
 				idleCount=0;
 			}
+		}
+		if (hostile){
+
 		}
 	}
 }

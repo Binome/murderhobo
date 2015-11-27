@@ -10,8 +10,8 @@ public class Reference {
 	public static final int SCALE = 600;
 	public static final int GRID_SIZE = 32;
 
-	public static final int IDLE_CYCLE = 750; // Time between sprite switches when mobs idle
-	
+	public static final int IDLE_CYCLE = 500; // Time between sprite switches when mobs idle
+
 	public static float musicVolume = 0.25f;
 	public static float sfxVolume = 0.75f;
 }
