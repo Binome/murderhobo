@@ -1,11 +1,14 @@
 package com.github.binome.murderhobo.entities;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 
 public class Monster extends SpriteEntity {
 	private boolean hostile;
 	private int idleCount = 0;
+	private float health = 2.0f;
 	
 	public Monster(){
 		super(32, 36, Main.spriteMan.get("monster").getSprite(1, 2));
@@ -30,7 +33,17 @@ public class Monster extends SpriteEntity {
 			}
 		}
 		if (hostile){
-
 		}
+	}
+	
+	public void applyAttack(Vector2f v){
+		health = health - v.length();
+		if (health <= 0){
+			die();
+		}
+	}
+	
+	public void die(){
+		isActive = false;
 	}
 }

@@ -17,4 +17,12 @@ public class InertialSprite extends SpriteEntity {
 		hitBox.setX((int) (hitBox.getX() + velocity.getX() * delta));
 		hitBox.setY((int) (hitBox.getY() + velocity.getY() * delta));
 	}
+
+	public Vector2f getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2f velocity) {
+		this.velocity = velocity;
+	}
 }

@@ -63,41 +63,52 @@ public class Level1 extends Level {
 
 		drawGrid();
 
-		Entity ent;
+		Arrow arr;
 		Iterator<Arrow> arrIt = arrows.iterator();
 		while (arrIt.hasNext()) {
-			ent = arrIt.next();
-			ent.update(delta);
+			arr = arrIt.next();
+			arr.update(delta);
 
 			// destroy on impact with wall
-			ArrayList<Cell> in = ent.inCells(this);
+			ArrayList<Cell> in = arr.inCells(this);
 			Iterator<Cell> it = in.iterator();
 			Cell c;
 			while (it.hasNext()) {
 				c = it.next();
 				if (!c.passable) {
-					ent.isActive = false;
+					arr.isActive = false;
+				}
+			}
+			
+			Monster mon;
+			Iterator<Monster> monIt = monsters.iterator();
+			while (monIt.hasNext()){
+				mon = monIt.next();
+				if (arr.getHitBox().intersects(mon.getHitBox())){
+					mon.applyAttack(arr.getVelocity());
+					arr.isActive=false;
 				}
 			}
 
-			if (!ent.isActive) {
+			if (!arr.isActive) {
 				// System.out.println("removing inactive entity");
 				arrIt.remove();
 			} else {
-				ent.draw();
+				arr.draw();
 			}
 		}
 
+		Monster mon;
 		Iterator<Monster> monIt = monsters.iterator();
 		while (monIt.hasNext()) {
-			ent = monIt.next();
-			ent.update(delta);
+			mon = monIt.next();
+			mon.update(delta);
 			
-			if (!ent.isActive) {
+			if (!mon.isActive) {
 				// System.out.println("removing inactive entity");
-				arrIt.remove();
+				monIt.remove();
 			} else {
-				ent.draw();
+				mon.draw();
 			}
 		}
 
