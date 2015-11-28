@@ -16,6 +16,7 @@ import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.scenes.Level;
 
 public class Hero extends InertialSprite {
+	private int score;
 	private float speed = 0.05f;
 	private float maxSpeed = 0.3f;
 	private float friction = 0.025f;
@@ -180,5 +181,17 @@ public class Hero extends InertialSprite {
 
 	public void addArrow(Arrow a) {
 		arrows.add(a);
+	}
+	
+	public void addScore(int i){
+		score = score + i;
+	}
+	
+	public void subScore(int i){
+		score = score - i;
+	}
+	
+	public int getScore(){
+		return score;
 	}
 }

@@ -12,7 +12,6 @@ import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.entities.Arrow;
-import com.github.binome.murderhobo.entities.Entity;
 import com.github.binome.murderhobo.entities.Hero;
 import com.github.binome.murderhobo.entities.Monster;
 
@@ -36,6 +35,7 @@ public class Level1 extends Level {
 	 * Draws the level and places Entities
 	 */
 	private void initLevel() {
+		murderMode=false;
 		Main.aman.play("level1-peaceful");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
@@ -102,7 +102,10 @@ public class Level1 extends Level {
 		Iterator<Monster> monIt = monsters.iterator();
 		while (monIt.hasNext()) {
 			mon = monIt.next();
-			mon.update(delta);
+			mon.update(delta, this.getInstance());
+			if (mon.isHostile() && !murderMode){
+				beginFight();
+			}
 			
 			if (!mon.isActive) {
 				// System.out.println("removing inactive entity");
@@ -199,6 +202,12 @@ public class Level1 extends Level {
 		Monster mon1 = new Monster();
 		mon1.setLoc(12*Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
 		monsters.add(mon1);
-
 	}
+	
+	private void beginFight(){
+		murderMode = true;
+		Main.aman.play("level1-murder");
+		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
+	}
+	
 }
