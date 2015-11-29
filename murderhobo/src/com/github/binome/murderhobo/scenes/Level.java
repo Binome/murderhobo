@@ -14,9 +14,9 @@ public abstract class Level extends Scene{
 	public static Level instance;
 	protected Cell[][] grid;
 
-	protected LinkedList<Arrow> arrows;
-	protected LinkedList<Monster> monsters;
-	protected LinkedList<Treasure> treasures;
+	protected static LinkedList<Arrow> arrows;
+	protected static LinkedList<Monster> monsters;
+	protected static LinkedList<Treasure> treasures;
 	
 	public void addArrow(Arrow a){
 		arrows.add(a);
