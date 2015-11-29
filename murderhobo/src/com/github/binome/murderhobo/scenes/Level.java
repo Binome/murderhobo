@@ -29,4 +29,6 @@ public abstract class Level extends Scene{
 	public Level getInstance() {
 		return null;
 	}
+	
+	public abstract void spawnTreasure(int x, int y, int value);
 }

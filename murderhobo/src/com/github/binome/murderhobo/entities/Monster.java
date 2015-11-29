@@ -86,16 +86,18 @@ public class Monster extends SpriteEntity {
 		}
 	}
 
-	public void applyAttack(Vector2f v) {
+	public void applyAttack(Vector2f v, Level lvl) {
 		health = health - v.length();
 		if (health <= 0) {
-			die();
+			die(lvl.getInstance());
 		}
 		goHostile();
 	}
 
-	public void die() {
+	public void die(Level lvl) {
+		System.out.println("Mob slain.");
 		isActive = false;
+		lvl.getInstance().spawnTreasure(getX(),getY(),Reference.MOB_LOOT);
 	}
 
 	public void goHostile() {

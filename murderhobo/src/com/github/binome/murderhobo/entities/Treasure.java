@@ -1,14 +1,12 @@
 package com.github.binome.murderhobo.entities;
 
-import org.newdawn.slick.Image;
-
 import com.github.binome.murderhobo.Main;
 
 public class Treasure extends SpriteEntity {
 	private int value;
 	
 	public Treasure(int value) {
-		super(16, 16, Main.spriteMan.get("treasure").getSprite(1, 1));
+		super(16, 16, Main.spriteMan.get("treasure").getSprite(0, 1));
 		this.value=value;
 	}
 
@@ -18,5 +16,9 @@ public class Treasure extends SpriteEntity {
 	
 	public int getValue(){
 		return value;
+	}
+	
+	public void makeSmall(){
+		img = Main.spriteMan.get("treasure").getSprite(1, 1);
 	}
 }

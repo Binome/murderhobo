@@ -109,7 +109,7 @@ public class Level1 extends Level {
 			while (monIt.hasNext()){
 				mon = monIt.next();
 				if (arr.getHitBox().intersects(mon.getHitBox())){
-					mon.applyAttack(arr.getVelocity());
+					mon.applyAttack(arr.getVelocity(), getInstance());
 					arr.isActive=false;
 				}
 			}
@@ -257,4 +257,12 @@ public class Level1 extends Level {
 		treasures.add(t1);
 	}
 	
+	public void spawnTreasure(int x, int y, int value){
+		Treasure t = new Treasure(value);
+		t.setLoc(x,y);
+		t.makeSmall();
+		this.getInstance().treasures.add(t);
+	}
+
+
 }
