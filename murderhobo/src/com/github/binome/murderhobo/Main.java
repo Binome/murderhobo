@@ -123,6 +123,7 @@ public class Main {
 		
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
 		spriteMan.loadSpriteSheet("wall", "res/dawnlike/Objects/Wall.png");
+		spriteMan.loadSpriteSheet("treasure", "res/dawnlike/Items/Money.png");
 		
 		spriteMan.loadSpriteSheet("hero", "res/antifarea/ranger_f.png",32,36);
 		spriteMan.loadSpriteSheet("arrowE", "res/arrowR.png");

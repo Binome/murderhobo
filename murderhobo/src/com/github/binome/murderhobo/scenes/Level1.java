@@ -15,6 +15,7 @@ import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.entities.Arrow;
 import com.github.binome.murderhobo.entities.Hero;
 import com.github.binome.murderhobo.entities.Monster;
+import com.github.binome.murderhobo.entities.Treasure;
 
 public class Level1 extends Level {
 	public final int CELLS_WIDE = 60;
@@ -42,10 +43,10 @@ public class Level1 extends Level {
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
 		arrows = new LinkedList<Arrow>();
 		monsters = new LinkedList<Monster>();
+		treasures = new LinkedList<Treasure>();
 		createGrid();
 
-		// TODO Place Tiles
-
+		placeMoney();
 		placeEntities();
 	}
 
@@ -64,24 +65,8 @@ public class Level1 extends Level {
 
 		drawGrid();
 		processArrows(delta);
-
-
-		Monster mon;
-		Iterator<Monster> monIt = monsters.iterator();
-		while (monIt.hasNext()) {
-			mon = monIt.next();
-			mon.update(delta, this.getInstance());
-			if (mon.isHostile() && !murderMode){
-				beginFight();
-			}
-			
-			if (!mon.isActive) {
-				// System.out.println("removing inactive entity");
-				monIt.remove();
-			} else {
-				mon.draw();
-			}
-		}
+		processMonsters(delta);
+		processTreasure();
 
 		Hero.getInstance().update(delta, this);
 		Hero.getInstance().draw();
@@ -139,9 +124,48 @@ public class Level1 extends Level {
 		
 	}
 
+	private void processMonsters(float delta){
+		Monster mon;
+		Iterator<Monster> monIt = monsters.iterator();
+		while (monIt.hasNext()) {
+			mon = monIt.next();
+			mon.update(delta, this.getInstance());
+			if (mon.isHostile() && !murderMode){
+				beginFight();
+			}
+			
+			if (!mon.isActive) {
+				// System.out.println("removing inactive entity");
+				monIt.remove();
+			} else {
+				mon.draw();
+			}
+		}
+	}
+	
+	private void processTreasure(){
+		Treasure t;
+		Iterator<Treasure> treasureIt = treasures.iterator();
+		while (treasureIt.hasNext()) {
+			t = treasureIt.next();
+			if (t.getHitBox().intersects(Hero.getInstance().getHitBox()))
+			{
+				Hero.getInstance().addScore(t.getValue());
+				t.isActive = false;
+			}
+			if (!t.isActive) {
+				// System.out.println("removing inactive entity");
+				treasureIt.remove();
+			} else {
+				t.draw();
+			}
+		}
+	}
+	
 	private void createGrid() {
 		// initialize with default texture
 		for (int i = 0; i < CELLS_WIDE; i++) {
+			
 			for (int j = 0; j < CELLS_TALL; j++) {
 				grid[i][j] = new Cell(i, j, Cell.TileType.ERROR_TEX);
 			}
@@ -204,7 +228,6 @@ public class Level1 extends Level {
 			for (int j = 0; j < CELLS_TALL; j++) {
 				grid[i][j].draw();
 			}
-
 		}
 	}
 
@@ -226,6 +249,12 @@ public class Level1 extends Level {
 		murderMode = true;
 		Main.aman.play("level1-murder");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
+	}
+	
+	private void placeMoney(){
+		Treasure t1 = new Treasure(Reference.LOOT_DEFAULT);
+		t1.setLoc(10*Reference.GRID_SIZE, 8 * Reference.GRID_SIZE);
+		treasures.add(t1);
 	}
 	
 }

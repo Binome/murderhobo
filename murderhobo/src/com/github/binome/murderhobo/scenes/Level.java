@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 import com.github.binome.murderhobo.entities.Arrow;
 import com.github.binome.murderhobo.entities.Monster;
+import com.github.binome.murderhobo.entities.Treasure;
 import com.github.binome.murderhobo.map.Cell;
 
 public abstract class Level extends Scene{
@@ -15,6 +16,7 @@ public abstract class Level extends Scene{
 
 	protected LinkedList<Arrow> arrows;
 	protected LinkedList<Monster> monsters;
+	protected LinkedList<Treasure> treasures;
 	
 	public void addArrow(Arrow a){
 		arrows.add(a);
