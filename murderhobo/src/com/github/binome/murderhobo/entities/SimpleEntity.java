@@ -7,7 +7,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-public abstract class SimpleEntity extends Entity {
+public class SimpleEntity extends Entity {
 
 	protected Rectangle hitBox;
 
@@ -30,19 +30,19 @@ public abstract class SimpleEntity extends Entity {
 
 	protected boolean isActive = true;
 	
-	protected SimpleEntity(int width, int height, Color c) {
+	public SimpleEntity(int width, int height, Color c) {
 		boxColor = c;
 		hitBox = new Rectangle(0, 0, width, height);
 		hasTex = false;
 	}
 
-	protected SimpleEntity(int x, int y, int width, int height, Color c) {
+	public SimpleEntity(int x, int y, int width, int height, Color c) {
 		boxColor = c;
 		hitBox = new Rectangle(x, y, width, height);
 		hasTex = false;
 	}
 	
-	protected SimpleEntity(int width, int height, String pngpath)
+	public SimpleEntity(int width, int height, String pngpath)
 	{
 		try
 		{

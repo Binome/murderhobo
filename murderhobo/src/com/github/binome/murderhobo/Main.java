@@ -6,8 +6,13 @@ package com.github.binome.murderhobo;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Color;
+import org.newdawn.slick.AngelCodeFont;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.LWJGLException;
+
+import com.github.binome.murderhobo.entities.SimpleEntity;
 import com.github.binome.murderhobo.scenes.Scene;
 import com.github.binome.murderhobo.scenes.StartMenu;
 
@@ -21,6 +26,8 @@ public class Main {
 
 	public static AudioManager aman;
 	public static SpriteManager spriteMan;
+	public static AngelCodeFont guiFont;
+	public static SimpleEntity guiBG;
 	
 	/**
 	 * Main loop
@@ -35,6 +42,7 @@ public class Main {
 		initGL(Reference.SCR_WIDTH, Reference.SCR_HEIGHT);
 		initAudio();
 		initSprites();
+		initGUI();
 
 		StartMenu menu = new StartMenu();
 		Scene currScene = menu;
@@ -121,5 +129,11 @@ public class Main {
 		spriteMan.loadSpriteSheet("arrowNE", "res/arrowNE.png");
 		
 		spriteMan.loadSpriteSheet("monster", "res/antifarea/monster.png",32,36);
+	}
+	
+	public static void initGUI() throws SlickException{
+		Image img = new Image("res/font/League_Gothic_0.png",false,Image.FILTER_NEAREST);
+		guiFont = new AngelCodeFont("res/font/League_Gothic.fnt", img);
+		guiBG = new SimpleEntity(Reference.SCR_WIDTH,32,(Color) Color.BLACK);
 	}
 }

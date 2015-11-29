@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.github.binome.murderhobo.Main;
@@ -62,7 +63,45 @@ public class Level1 extends Level {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 		drawGrid();
+		processArrows(delta);
 
+
+		Monster mon;
+		Iterator<Monster> monIt = monsters.iterator();
+		while (monIt.hasNext()) {
+			mon = monIt.next();
+			mon.update(delta, this.getInstance());
+			if (mon.isHostile() && !murderMode){
+				beginFight();
+			}
+			
+			if (!mon.isActive) {
+				// System.out.println("removing inactive entity");
+				monIt.remove();
+			} else {
+				mon.draw();
+			}
+		}
+
+		Hero.getInstance().update(delta, this);
+		Hero.getInstance().draw();
+
+		drawGUI();
+		
+		return true;
+	}
+
+	private void drawGUI() {
+		int guiX = Hero.getInstance().getX() - xScale;
+		int guiY = Hero.getInstance().getY() - yScale;
+		Main.guiBG.setLoc(guiX, guiY);
+		Main.guiBG.draw();
+		Main.guiFont.drawString(guiX,guiY,
+				"Gold: " + Hero.getInstance().getScore());
+		
+	}
+
+	private void processArrows(float delta) {
 		Arrow arr;
 		Iterator<Arrow> arrIt = arrows.iterator();
 		while (arrIt.hasNext()) {
@@ -97,28 +136,7 @@ public class Level1 extends Level {
 				arr.draw();
 			}
 		}
-
-		Monster mon;
-		Iterator<Monster> monIt = monsters.iterator();
-		while (monIt.hasNext()) {
-			mon = monIt.next();
-			mon.update(delta, this.getInstance());
-			if (mon.isHostile() && !murderMode){
-				beginFight();
-			}
-			
-			if (!mon.isActive) {
-				// System.out.println("removing inactive entity");
-				monIt.remove();
-			} else {
-				mon.draw();
-			}
-		}
-
-		Hero.getInstance().update(delta, this);
-		Hero.getInstance().draw();
-
-		return true;
+		
 	}
 
 	private void createGrid() {

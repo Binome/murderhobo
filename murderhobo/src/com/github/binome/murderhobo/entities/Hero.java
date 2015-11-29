@@ -18,10 +18,10 @@ import com.github.binome.murderhobo.scenes.Level;
 public class Hero extends InertialSprite {
 	private int score;
 	private float speed = 0.05f;
-	private float maxSpeed = 0.3f;
+	private float maxSpeed = 0.32f;
 	private float friction = 0.025f;
-	// Cell[][] grid = Level1.getInstance().grid;
 	private float arrowCharge = 0;
+	private float health = 4;
 
 	private static Hero ourHero;
 
@@ -102,7 +102,6 @@ public class Hero extends InertialSprite {
 		ArrayList<Cell> in = inCells(lvl.getInstance());
 		Iterator<Cell> it = in.iterator();
 		Cell c;
-		//Rectangle r = null;
 		while (it.hasNext()) {
 			c = it.next();
 			if (!c.passable) {
@@ -131,11 +130,9 @@ public class Hero extends InertialSprite {
 							ourHero.velocity.setX(0.0f);
 						}
 					}
-
 				}
 			}
 		}
-
 	}
 
 	private void tweakSpeed() {
@@ -182,16 +179,16 @@ public class Hero extends InertialSprite {
 	public void addArrow(Arrow a) {
 		arrows.add(a);
 	}
-	
-	public void addScore(int i){
+
+	public void addScore(int i) {
 		score = score + i;
 	}
-	
-	public void subScore(int i){
+
+	public void subScore(int i) {
 		score = score - i;
 	}
-	
-	public int getScore(){
+
+	public int getScore() {
 		return score;
 	}
 }
