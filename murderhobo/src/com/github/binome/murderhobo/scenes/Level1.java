@@ -20,8 +20,6 @@ import com.github.binome.murderhobo.entities.Treasure;
 public class Level1 extends Level {
 	public final int CELLS_WIDE = 60;
 	public final int CELLS_TALL = 40;
-	private int xScale = 400;
-	private int yScale = 300;
 
 	@SuppressWarnings("unused")
 	private Scene nextScene;
@@ -74,16 +72,6 @@ public class Level1 extends Level {
 		drawGUI();
 		
 		return true;
-	}
-
-	private void drawGUI() {
-		int guiX = Hero.getInstance().getX() - xScale;
-		int guiY = Hero.getInstance().getY() - yScale;
-		Main.guiBG.setLoc(guiX, guiY);
-		Main.guiBG.draw();
-		Main.guiFont.drawString(guiX,guiY,
-				"Gold: " + Hero.getInstance().getScore());
-		
 	}
 
 	private void processArrows(float delta) {
