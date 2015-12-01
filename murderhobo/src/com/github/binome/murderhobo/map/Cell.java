@@ -40,6 +40,11 @@ public class Cell extends Entity {
 	public enum TileType {
 		ERROR_TEX(Main.spriteMan.get("floor").getSprite(13, 1),false),
 		FLOOR(Main.spriteMan.get("floor").getSprite(1, 7), true),
+		
+		NWDIRT(Main.spriteMan.get("floor").getSprite(0, 24), true),
+		NEDIRT(Main.spriteMan.get("floor").getSprite(2, 24), true),
+		EDIRT(Main.spriteMan.get("floor").getSprite(2, 25), true),
+		WDIRT(Main.spriteMan.get("floor").getSprite(0, 25), true),
 
 		NWALL(Main.spriteMan.get("wall").getSprite(8,15), false),
 		SWALL(Main.spriteMan.get("wall").getSprite(11,17), false),

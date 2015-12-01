@@ -21,7 +21,6 @@ public class SpriteEntity extends Entity {
 
 	@Override
 	public void update(float delta) {
-		
 	}
 	
 	public Cell getLocInLvl(Level lvl){
@@ -30,4 +29,4 @@ public class SpriteEntity extends Entity {
 				[(int) Math.floor(getY()/Reference.GRID_SIZE)];
 	}
 
-}
+} 

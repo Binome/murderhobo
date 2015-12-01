@@ -14,6 +14,8 @@ public abstract class Level extends Scene{
 	protected boolean murderMode;
 	protected int xScale = 400;
 	protected int yScale = 300;
+
+	private Scene nextScene;
 	
 	public static Level instance;
 	protected Cell[][] grid;
@@ -42,6 +44,10 @@ public abstract class Level extends Scene{
 		Main.guiFont.drawString(guiX,guiY,
 				"Gold: " + Hero.getInstance().getScore());
 		
+	}
+	
+	public Scene nextScene() {
+		return nextScene;
 	}
 	
 	public abstract void spawnTreasure(int x, int y, int value);

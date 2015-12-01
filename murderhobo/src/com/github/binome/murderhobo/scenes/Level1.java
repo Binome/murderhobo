@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 
 import com.github.binome.murderhobo.Main;
@@ -28,14 +27,13 @@ public class Level1 extends Level {
 		nextScene = this;
 
 		initLevel();
-
 	}
 
 	/**
 	 * Draws the level and places Entities
 	 */
 	private void initLevel() {
-		murderMode=false;
+		murderMode = false;
 		Main.aman.play("level1-peaceful");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 		grid = new Cell[CELLS_WIDE][CELLS_TALL];
@@ -50,7 +48,6 @@ public class Level1 extends Level {
 
 	@Override
 	public boolean drawFrame(float delta) {
-
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
 		GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
@@ -68,10 +65,16 @@ public class Level1 extends Level {
 
 		Hero.getInstance().update(delta, this);
 		Hero.getInstance().draw();
-
 		drawGUI();
-		
-		return true;
+
+		// Is the hero in the exit squares?
+		if (Hero.getInstance().getX() >= 57 * Reference.GRID_SIZE
+				&& Hero.getInstance().getY() >= 37 * Reference.GRID_SIZE) {
+			nextScene = new WinScreen(Hero.getInstance().getScore());
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private void processArrows(float delta) {
@@ -91,14 +94,14 @@ public class Level1 extends Level {
 					arr.isActive = false;
 				}
 			}
-			
+
 			Monster mon;
 			Iterator<Monster> monIt = monsters.iterator();
-			while (monIt.hasNext()){
+			while (monIt.hasNext()) {
 				mon = monIt.next();
-				if (arr.getHitBox().intersects(mon.getHitBox())){
+				if (arr.getHitBox().intersects(mon.getHitBox())) {
 					mon.applyAttack(arr.getVelocity(), getInstance());
-					arr.isActive=false;
+					arr.isActive = false;
 				}
 			}
 
@@ -109,19 +112,19 @@ public class Level1 extends Level {
 				arr.draw();
 			}
 		}
-		
+
 	}
 
-	private void processMonsters(float delta){
+	private void processMonsters(float delta) {
 		Monster mon;
 		Iterator<Monster> monIt = monsters.iterator();
 		while (monIt.hasNext()) {
 			mon = monIt.next();
 			mon.update(delta, this.getInstance());
-			if (mon.isHostile() && !murderMode){
+			if (mon.isHostile() && !murderMode) {
 				beginFight();
 			}
-			
+
 			if (!mon.isActive) {
 				// System.out.println("removing inactive entity");
 				monIt.remove();
@@ -130,14 +133,13 @@ public class Level1 extends Level {
 			}
 		}
 	}
-	
-	private void processTreasure(){
+
+	private void processTreasure() {
 		Treasure t;
 		Iterator<Treasure> treasureIt = treasures.iterator();
 		while (treasureIt.hasNext()) {
 			t = treasureIt.next();
-			if (t.getHitBox().intersects(Hero.getInstance().getHitBox()))
-			{
+			if (t.getHitBox().intersects(Hero.getInstance().getHitBox())) {
 				Hero.getInstance().addScore(t.getValue());
 				t.isActive = false;
 			}
@@ -149,11 +151,11 @@ public class Level1 extends Level {
 			}
 		}
 	}
-	
+
 	private void createGrid() {
 		// initialize with default texture
 		for (int i = 0; i < CELLS_WIDE; i++) {
-			
+
 			for (int j = 0; j < CELLS_TALL; j++) {
 				grid[i][j] = new Cell(i, j, Cell.TileType.ERROR_TEX);
 			}
@@ -191,15 +193,13 @@ public class Level1 extends Level {
 
 		// first room
 		grid[6][6].setTileType(Cell.TileType.INNER_NWWALL);
-		grid[7][6].setTileType(Cell.TileType.INNER_NWALL);
-		grid[8][6].setTileType(Cell.TileType.INNER_NWALL);
-		grid[9][6].setTileType(Cell.TileType.INNER_NWALL);
-		grid[10][6].setTileType(Cell.TileType.INNER_NWALL);
+		for (int i = 7; i <= 10; i++) {
+			grid[i][6].setTileType(Cell.TileType.INNER_NWALL);
+		}
 		grid[13][6].setTileType(Cell.TileType.INNER_NEWALL);
-		grid[13][7].setTileType(Cell.TileType.INNER_EWALL);
-		grid[13][8].setTileType(Cell.TileType.INNER_EWALL);
-		grid[13][9].setTileType(Cell.TileType.INNER_EWALL);
-		grid[13][10].setTileType(Cell.TileType.INNER_EWALL);
+		for (int i = 7; i <= 10; i++) {
+			grid[13][i].setTileType(Cell.TileType.INNER_EWALL);
+		}
 		grid[13][11].setTileType(Cell.TileType.INNER_SEWALL);
 		grid[12][11].setTileType(Cell.TileType.INNER_SWALL);
 		grid[11][11].setTileType(Cell.TileType.INNER_SWALL);
@@ -209,6 +209,16 @@ public class Level1 extends Level {
 		grid[6][10].setTileType(Cell.TileType.INNER_WWALL);
 		grid[6][7].setTileType(Cell.TileType.INNER_WWALL);
 
+		// exit room
+		grid[56][36].setTileType(Cell.TileType.INNER_NWWALL);
+		grid[56][37].setTileType(Cell.TileType.INNER_WWALL);
+		grid[56][38].setTileType(Cell.TileType.INNER_WWALL);
+		grid[57][37].setTileType(Cell.TileType.NWDIRT);
+		grid[58][37].setTileType(Cell.TileType.NEDIRT);
+		grid[57][38].setTileType(Cell.TileType.WDIRT);
+		grid[57][39].setTileType(Cell.TileType.WDIRT);
+		grid[58][38].setTileType(Cell.TileType.EDIRT);
+		grid[58][39].setTileType(Cell.TileType.EDIRT);
 	}
 
 	private void drawGrid() {
@@ -229,28 +239,28 @@ public class Level1 extends Level {
 
 	private void placeEntities() {
 		Monster mon1 = new Monster();
-		mon1.setLoc(12*Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
+		mon1.setLoc(12 * Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
 		monsters.add(mon1);
 	}
-	
-	private void beginFight(){
+
+	private void beginFight() {
 		murderMode = true;
 		Main.aman.play("level1-murder");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 	}
-	
-	private void placeMoney(){
+
+	private void placeMoney() {
 		Treasure t1 = new Treasure(Reference.LOOT_DEFAULT);
-		t1.setLoc(10*Reference.GRID_SIZE, 8 * Reference.GRID_SIZE);
+		t1.setLoc(10 * Reference.GRID_SIZE, 8 * Reference.GRID_SIZE);
 		treasures.add(t1);
 	}
-	
-	public void spawnTreasure(int x, int y, int value){
-		Treasure t = new Treasure(value);
-		t.setLoc(x,y);
-		t.makeSmall();
-		this.getInstance().treasures.add(t);
-	}
 
+	public void spawnTreasure(int x, int y, int value) {
+		Treasure t = new Treasure(value);
+		t.setLoc(x, y);
+		t.makeSmall();
+		this.getInstance();
+		Level.treasures.add(t);
+	}
 
 }

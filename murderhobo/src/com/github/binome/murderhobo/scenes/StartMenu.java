@@ -18,7 +18,7 @@ public class StartMenu extends Scene {
 	private Fixture playGame;
 	private Fixture quit;
 
-	protected LinkedList<Fixture> fixtures = new LinkedList<Fixture>();
+	private LinkedList<Fixture> fixtures = new LinkedList<Fixture>();
 
 	private Scene nextScene;
 
@@ -32,7 +32,6 @@ public class StartMenu extends Scene {
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 
 		initTitle();
-
 	}
 
 	/**
@@ -51,7 +50,7 @@ public class StartMenu extends Scene {
 		drawTitle();
 		checkInput();
 
-			return false;
+		return false;
 	}
 
 	/**

@@ -12,7 +12,7 @@ public class Reference {
 
 	public static final int IDLE_CYCLE = 500; // Time between sprite switches when mobs idle
 
-	public static float musicVolume = 0.25f;
+	public static float musicVolume = 0.00f;
 	public static float sfxVolume = 0.75f;
 	
 	public static final int LOOT_DEFAULT = 10;
