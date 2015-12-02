@@ -4,10 +4,12 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
+import org.newdawn.slick.Color;
 
 import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.entities.Fixture;
+import com.github.binome.murderhobo.entities.Hero;
 
 public class GameOver extends Scene {
 	private int score;
@@ -30,20 +32,32 @@ public class GameOver extends Scene {
 		GL11.glOrtho(0, Reference.SCR_WIDTH, Reference.SCR_HEIGHT, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		Main.guiFont.drawString(0, 0, "You collected " + score + " gold!");
-		if (kills != 1) {
-			Main.guiFont.drawString(0, 32, "And killed " + kills + " innocent monsters!");
+		String s0;
+		if (Hero.getInstance().getHealth() <= 0) {
+			s0 = "You have been slain!";
 		} else {
-			Main.guiFont.drawString(0, 32, "And killed only 1 innocent monster!");
+			s0 = "You are victorious!";
+		}
+		Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s0)) / 2, 0.0f, s0, Color.red);
+
+		String s1 = "You collected " + score + " gold!";
+		Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s1)) / 2, 64, s1);
+		if (kills != 1) {
+			String s2 = "And killed " + kills + " innocent monsters!";
+			Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s2)) / 2, 96, s2);
+		} else {
+			String s3 = "And killed only 1 innocent monster!";
+			Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s3)) / 2, 96, s3);
 		}
 		if (score == 0 && kills == 0) {
-			Main.guiFont.drawString(0, 64, "I feel like you may have missed the point of the game...");
+			String s4 = "I feel like you may have missed the point of the game...";
+			Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s4)) / 2, 128, s4);
 		}
-		
+
 		Fixture quit = new Fixture(256, 128, "res/title/Quit-end.png");
 		quit.setLoc((Reference.SCR_WIDTH - quit.getWidth()) / 2, (int) (.8 * Reference.SCR_HEIGHT));
 		quit.draw();
-		
+
 		while (Mouse.next()) {
 			if (Mouse.getEventButtonState()) {
 				if (Mouse.getEventButton() == 0) {
@@ -60,7 +74,7 @@ public class GameOver extends Scene {
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
