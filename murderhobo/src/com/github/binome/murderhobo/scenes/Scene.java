@@ -43,8 +43,8 @@ public abstract class Scene
             {
                 return false;
             }
-            System.out.println("keepGoing is: " + keepGoing);
-            System.out.println("Next scene is: " + nextScene());
+            //System.out.println("keepGoing is: " + keepGoing);
+            //System.out.println("Next scene is: " + nextScene());
 
         } while (keepGoing);
 

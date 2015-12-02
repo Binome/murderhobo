@@ -12,7 +12,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.LWJGLException;
 
+import com.github.binome.murderhobo.entities.Fixture;
 import com.github.binome.murderhobo.entities.SimpleEntity;
+import com.github.binome.murderhobo.entities.SpriteEntity;
 import com.github.binome.murderhobo.scenes.Scene;
 import com.github.binome.murderhobo.scenes.StartMenu;
 
@@ -125,13 +127,16 @@ public class Main {
 		
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
 		spriteMan.loadSpriteSheet("wall", "res/dawnlike/Objects/Wall.png");
+		
 		spriteMan.loadSpriteSheet("treasure", "res/dawnlike/Items/Money.png");
 		
 		spriteMan.loadSpriteSheet("hero", "res/antifarea/ranger_f.png",32,36);
+		spriteMan.loadSpriteSheet("monster", "res/antifarea/monster.png",32,36);
+		
 		spriteMan.loadSpriteSheet("arrowE", "res/arrowR.png");
 		spriteMan.loadSpriteSheet("arrowNE", "res/arrowNE.png");
 		
-		spriteMan.loadSpriteSheet("monster", "res/antifarea/monster.png",32,36);
+		spriteMan.loadSpriteSheet("GUI", "res/dawnlike/GUI/GUI0.png");
 	}
 	
 	public static void initGUI() throws SlickException{
