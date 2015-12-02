@@ -50,7 +50,11 @@ public class StartMenu extends Scene {
 		drawTitle();
 		checkInput();
 
-		return false;
+		if (nextScene == this){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

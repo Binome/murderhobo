@@ -49,11 +49,13 @@ public class Main {
 		
         while (currScene.go() )
         {
+        	System.out.println("Scene is: " + currScene);
              // if nextScene() returns null (the default) reload the menu
             currScene = currScene.nextScene();
 
             if (currScene == null)
             {
+            	//System.out.println ("currScene is null");
                 currScene = menu;
             }
 

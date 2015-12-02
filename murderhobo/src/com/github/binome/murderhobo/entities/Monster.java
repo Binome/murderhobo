@@ -98,6 +98,7 @@ public class Monster extends SpriteEntity {
 		System.out.println("Mob slain.");
 		isActive = false;
 		lvl.getInstance().spawnTreasure(getX(),getY(),Reference.MOB_LOOT);
+		Hero.getInstance().addKill();
 	}
 
 	public void goHostile() {

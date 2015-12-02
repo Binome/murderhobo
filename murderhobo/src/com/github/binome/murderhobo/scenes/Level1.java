@@ -70,7 +70,7 @@ public class Level1 extends Level {
 		// Is the hero in the exit squares?
 		if (Hero.getInstance().getX() >= 57 * Reference.GRID_SIZE
 				&& Hero.getInstance().getY() >= 37 * Reference.GRID_SIZE) {
-			nextScene = new WinScreen(Hero.getInstance().getScore());
+			nextScene = new WinScreen(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
 			return false;
 		} else {
 			return true;
@@ -261,6 +261,11 @@ public class Level1 extends Level {
 		t.makeSmall();
 		this.getInstance();
 		Level.treasures.add(t);
+	}
+	
+	@Override
+	public Scene nextScene() {
+		return nextScene;
 	}
 
 }

@@ -21,7 +21,8 @@ public class Hero extends InertialSprite {
 	private float maxSpeed = 0.32f;
 	private float friction = 0.025f;
 	private float arrowCharge = 0;
-	private float health = 4;
+	private float health;
+	private int killCount;
 
 	private static Hero ourHero;
 
@@ -35,6 +36,8 @@ public class Hero extends InertialSprite {
 
 	public Hero(int width, int height, Image i) {
 		super(width, height, i);
+		killCount = 0;
+		health = 4;
 	}
 
 	public void draw() {
@@ -190,5 +193,13 @@ public class Hero extends InertialSprite {
 
 	public int getScore() {
 		return score;
+	}
+	
+	public int getKillCount(){
+		return killCount;
+	}
+	
+	public void addKill(){
+		killCount++;
 	}
 }

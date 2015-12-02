@@ -13,7 +13,7 @@ public abstract class Scene
     public abstract boolean drawFrame(float delta);
 
     // null typically means Game should load menu
-    public Scene nextScene() { return null; }
+    public abstract Scene nextScene();
 
     protected void exit()
     {
@@ -43,7 +43,8 @@ public abstract class Scene
             {
                 return false;
             }
-
+            System.out.println("keepGoing is: " + keepGoing);
+            System.out.println("Next scene is: " + nextScene());
 
         } while (keepGoing);
 
