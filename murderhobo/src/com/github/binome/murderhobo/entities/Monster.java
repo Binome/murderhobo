@@ -16,6 +16,7 @@ public class Monster extends SpriteEntity {
 	private int idleCount = 0;
 	private float health = 2.0f;
 	private static final int ATTACK_DELAY = 2000;
+	private static final int ATK_POWER = 1;
 	private int atkGap = 0;
 
 	public Monster() {
@@ -110,6 +111,6 @@ public class Monster extends SpriteEntity {
 	}
 
 	private void hurtPlayer() {
-
+		Hero.getInstance().applyWound(ATK_POWER);
 	}
 }

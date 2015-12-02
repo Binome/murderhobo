@@ -46,7 +46,7 @@ public class Hero extends InertialSprite {
 	}
 
 	public void update(float delta, Level lvl) {
-
+		
 		int oldX = getX();
 		int oldY = getY();
 
@@ -205,5 +205,9 @@ public class Hero extends InertialSprite {
 	
 	public int getHealth(){
 		return health;
+	}
+	
+	public void applyWound(int damage){
+		health = health - damage;
 	}
 }

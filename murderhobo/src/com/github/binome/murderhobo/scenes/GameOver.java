@@ -9,12 +9,12 @@ import com.github.binome.murderhobo.Main;
 import com.github.binome.murderhobo.Reference;
 import com.github.binome.murderhobo.entities.Fixture;
 
-public class WinScreen extends Scene {
+public class GameOver extends Scene {
 	private int score;
 	private int kills;
 	private Scene nextScene;
 
-	public WinScreen(int score, int kills) {
+	public GameOver(int score, int kills) {
 		this.score = score;
 		this.kills = kills;
 		nextScene = this;

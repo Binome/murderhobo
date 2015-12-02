@@ -67,10 +67,16 @@ public class Level1 extends Level {
 		Hero.getInstance().draw();
 		drawGUI();
 
+		//Is the hero dead?
+		if (Hero.getInstance().getHealth() <= 0){
+			nextScene = new GameOver(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
+			return false;
+		}
+		
 		// Is the hero in the exit squares?
 		if (Hero.getInstance().getX() >= 57 * Reference.GRID_SIZE
 				&& Hero.getInstance().getY() >= 37 * Reference.GRID_SIZE) {
-			nextScene = new WinScreen(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
+			nextScene = new GameOver(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
 			return false;
 		} else {
 			return true;
