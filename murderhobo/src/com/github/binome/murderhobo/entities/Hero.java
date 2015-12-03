@@ -207,7 +207,9 @@ public class Hero extends InertialSprite {
 		return health;
 	}
 	
-	public void applyWound(int damage){
+	public void applyWound(int damage, Level lvl){
 		health = health - damage;
+		Main.aman.play("playerHurt");
+		lvl.getInstance().applyPow();
 	}
 }

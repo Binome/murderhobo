@@ -12,9 +12,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.LWJGLException;
 
-import com.github.binome.murderhobo.entities.Fixture;
 import com.github.binome.murderhobo.entities.SimpleEntity;
-import com.github.binome.murderhobo.entities.SpriteEntity;
 import com.github.binome.murderhobo.scenes.Scene;
 import com.github.binome.murderhobo.scenes.StartMenu;
 
@@ -118,6 +116,7 @@ public class Main {
 		aman.loadLoop("level1-murder", "res/audio/music/Dungeon_Boss.ogg");
 		
 		aman.loadSample("shoot", "res/audio/sfx/shoot.wav");
+		aman.loadSample("playerHurt", "res/audio/sfx/playerHurt.wav");
 
 	}
 	
@@ -137,6 +136,7 @@ public class Main {
 		spriteMan.loadSpriteSheet("arrowNE", "res/arrowNE.png");
 		
 		spriteMan.loadSpriteSheet("GUI", "res/dawnlike/GUI/GUI0.png");
+		spriteMan.loadSpriteSheet("POW", "res/pow.png",32,32);
 	}
 	
 	public static void initGUI() throws SlickException{

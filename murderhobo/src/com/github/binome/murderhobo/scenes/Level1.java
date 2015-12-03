@@ -19,13 +19,14 @@ import com.github.binome.murderhobo.entities.Treasure;
 public class Level1 extends Level {
 	public final int CELLS_WIDE = 60;
 	public final int CELLS_TALL = 40;
-
-	@SuppressWarnings("unused")
 	private Scene nextScene;
+	
+	//Amount of time for pow effect to display when player is injured
+	public final int POW_TIME = 250;;
+	public int powTimer = POW_TIME;
 
 	public Level1() {
 		nextScene = this;
-
 		initLevel();
 	}
 
@@ -67,6 +68,15 @@ public class Level1 extends Level {
 		Hero.getInstance().draw();
 		drawGUI();
 
+		//Is player injured?
+		if (powTimer < POW_TIME){
+			Main.spriteMan.get("pow").draw(Hero.getInstance().getX(),
+					Hero.getInstance().getY());
+			powTimer += delta;
+		} else if (powTimer > POW_TIME){
+			powTimer = POW_TIME;
+		}
+		
 		//Is the hero dead?
 		if (Hero.getInstance().getHealth() <= 0){
 			nextScene = new GameOver(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
@@ -272,6 +282,10 @@ public class Level1 extends Level {
 	@Override
 	public Scene nextScene() {
 		return nextScene;
+	}
+	
+	public void applyPow(){
+		powTimer = 0;
 	}
 
 }

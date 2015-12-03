@@ -18,7 +18,7 @@ public abstract class Level extends Scene {
 	protected boolean murderMode;
 	protected int xScale = 400;
 	protected int yScale = 300;
-
+	
 	private Scene nextScene;
 
 	public static Level instance;
@@ -88,5 +88,7 @@ public abstract class Level extends Scene {
 		return nextScene;
 	}
 
+	public abstract void applyPow();
+	
 	public abstract void spawnTreasure(int x, int y, int value);
 }

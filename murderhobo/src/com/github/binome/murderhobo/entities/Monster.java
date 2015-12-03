@@ -78,7 +78,7 @@ public class Monster extends SpriteEntity {
 					hitBox.setY(getY() + speed);
 				}
 			} else if (atkGap <= 0) {
-				hurtPlayer();
+				hurtPlayer(lvl);
 				atkGap = ATTACK_DELAY;
 			}
 			if (atkGap > 0) {
@@ -110,7 +110,7 @@ public class Monster extends SpriteEntity {
 		return hostile;
 	}
 
-	private void hurtPlayer() {
-		Hero.getInstance().applyWound(ATK_POWER);
+	private void hurtPlayer(Level lvl) {
+		Hero.getInstance().applyWound(ATK_POWER,lvl);
 	}
 }
