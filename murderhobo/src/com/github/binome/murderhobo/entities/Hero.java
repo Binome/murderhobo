@@ -16,6 +16,7 @@ import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.scenes.Level;
 
 public class Hero extends InertialSprite {
+	private final int STARTING_HEALTH = 4;
 	private int score;
 	private float speed = 0.05f;
 	private float maxSpeed = 0.32f;
@@ -39,7 +40,7 @@ public class Hero extends InertialSprite {
 	public Hero(int width, int height, Image i) {
 		super(width, height, i);
 		killCount = 0;
-		health = 4;
+		health = STARTING_HEALTH;
 	}
 
 	public void draw() {
@@ -222,5 +223,12 @@ public class Hero extends InertialSprite {
 			lvl.getInstance().applyPow();
 			invulnTimer = 0;
 		}
+	}
+
+	public void reset() {
+		health = STARTING_HEALTH;
+		score = 0;
+		killCount = 0;
+		velocity = new Vector2f(0.0f, 0.0f);
 	}
 }

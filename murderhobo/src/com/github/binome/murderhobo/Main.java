@@ -12,7 +12,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.LWJGLException;
 
+import com.github.binome.murderhobo.entities.Hero;
 import com.github.binome.murderhobo.entities.SimpleEntity;
+import com.github.binome.murderhobo.scenes.Level1;
 import com.github.binome.murderhobo.scenes.Scene;
 import com.github.binome.murderhobo.scenes.StartMenu;
 
@@ -143,5 +145,10 @@ public class Main {
 		Image img = new Image("res/font/League_Gothic_0.png",false,Image.FILTER_NEAREST);
 		guiFont = new AngelCodeFont("res/font/League_Gothic.fnt", img);
 		guiBG = new SimpleEntity(Reference.SCR_WIDTH,32,(Color) Color.BLACK);
+	}
+
+	public static void reset() {
+		Level1.reset();
+		Hero.getInstance().reset();
 	}
 }

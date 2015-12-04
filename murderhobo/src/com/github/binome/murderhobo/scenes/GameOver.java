@@ -54,9 +54,13 @@ public class GameOver extends Scene {
 			Main.guiFont.drawString((Reference.SCR_WIDTH - Main.guiFont.getWidth(s4)) / 2, 128, s4);
 		}
 
-		Fixture quit = new Fixture(256, 128, "res/title/Quit-end.png");
+		Fixture quit = new Fixture(256, 128, "res/title/QUIT-End.png");
 		quit.setLoc((Reference.SCR_WIDTH - quit.getWidth()) / 2, (int) (.8 * Reference.SCR_HEIGHT));
 		quit.draw();
+		
+		Fixture replay = new Fixture(512, 128, "res/title/PLAY-AGAIN.png");
+		replay.setLoc((Reference.SCR_WIDTH - replay.getWidth()) / 2, (int) (.6 * Reference.SCR_HEIGHT));
+		replay.draw();
 
 		while (Mouse.next()) {
 			if (Mouse.getEventButtonState()) {
@@ -70,6 +74,12 @@ public class GameOver extends Scene {
 					if (quit.getHitBox().contains(p)) {
 						// System.out.println("Clicked quit.");
 						exit();
+					}
+					if (replay.getHitBox().contains(p)) {
+						// System.out.println("Clicked quit.");
+						Main.reset();
+						nextScene = new StartMenu();
+						return false;
 					}
 				}
 			}

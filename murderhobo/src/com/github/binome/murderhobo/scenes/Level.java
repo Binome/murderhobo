@@ -16,14 +16,14 @@ import com.github.binome.murderhobo.map.Cell;
 public abstract class Level extends Scene {
 	public final int CELLS_WIDE = 0;
 	public final int CELLS_TALL = 0;
-	protected boolean murderMode;
+	protected static boolean murderMode;
 	protected int xScale = 400;
 	protected int yScale = 300;
 	
 	private Scene nextScene;
 
 	public static Level instance;
-	protected Cell[][] grid;
+	protected static Cell[][] grid;
 
 	protected static LinkedList<Arrow> arrows;
 	protected static LinkedList<Monster> monsters;

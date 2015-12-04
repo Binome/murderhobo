@@ -17,8 +17,8 @@ import com.github.binome.murderhobo.entities.Monster;
 import com.github.binome.murderhobo.entities.Treasure;
 
 public class Level1 extends Level {
-	public final int CELLS_WIDE = 60;
-	public final int CELLS_TALL = 40;
+	public final static int CELLS_WIDE = 60;
+	public final static int CELLS_TALL = 40;
 	private Scene nextScene;
 
 	// Amount of time for pow effect to display when player is injured
@@ -33,7 +33,7 @@ public class Level1 extends Level {
 	/**
 	 * Draws the level and places Entities
 	 */
-	private void initLevel() {
+	private static void initLevel() {
 		murderMode = false;
 		Main.aman.play("level1-peaceful");
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
@@ -42,6 +42,7 @@ public class Level1 extends Level {
 		monsters = new LinkedList<Monster>();
 		treasures = new LinkedList<Treasure>();
 		createGrid();
+		Hero.getInstance().setLoc(64, 64);
 
 		placeMoney();
 		placeEntities();
@@ -153,7 +154,7 @@ public class Level1 extends Level {
 		}
 	}
 
-	private void createGrid() {
+	private static void createGrid() {
 		// initialize with default texture
 		for (int i = 0; i < CELLS_WIDE; i++) {
 
@@ -299,12 +300,12 @@ public class Level1 extends Level {
 	public Level getInstance() {
 		if (instance == null) {
 			instance = new Level1();
-			Hero.getInstance().setLoc(64, 64);
+			//Hero.getInstance().setLoc(64, 64);
 		}
 		return instance;
 	}
 
-	private void placeEntities() {
+	private static void placeEntities() {
 		Monster mon1 = new Monster();
 		mon1.setLoc(12 * Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
 		monsters.add(mon1);
@@ -374,7 +375,7 @@ public class Level1 extends Level {
 		SoundStore.get().setCurrentMusicVolume(Reference.musicVolume);
 	}
 
-	private void placeMoney() {
+	private static void placeMoney() {
 		Treasure t1 = new Treasure(Reference.LOOT_DEFAULT);
 		t1.setLoc(10 * Reference.GRID_SIZE, 8 * Reference.GRID_SIZE);
 		treasures.add(t1);
@@ -422,6 +423,10 @@ public class Level1 extends Level {
 
 	public void applyPow() {
 		powTimer = 0;
+	}
+
+	public static void reset() {
+		initLevel();
 	}
 
 }
