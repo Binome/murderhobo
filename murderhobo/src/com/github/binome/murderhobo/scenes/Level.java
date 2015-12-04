@@ -104,4 +104,23 @@ public abstract class Level extends Scene {
 			}
 		}
 	}
+	
+	protected void processTreasure() {
+		Treasure t;
+		Iterator<Treasure> treasureIt = treasures.iterator();
+		while (treasureIt.hasNext()) {
+			t = treasureIt.next();
+			if (t.getHitBox().intersects(Hero.getInstance().getHitBox())) {
+				Hero.getInstance().addScore(t.getValue());
+				Main.aman.play("money");
+				t.isActive = false;
+			}
+			if (!t.isActive) {
+				// System.out.println("removing inactive entity");
+				treasureIt.remove();
+			} else {
+				t.draw();
+			}
+		}
+	}
 }

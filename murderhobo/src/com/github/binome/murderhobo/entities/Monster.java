@@ -65,8 +65,8 @@ public class Monster extends InertialSprite {
 			ArrayList<Cell> pathToHero = Pathfinder.findPath(monLoc, heroLoc, lvl.getGrid());
 			if (pathToHero.size() > 1) {
 				Cell next = pathToHero.get(pathToHero.size() - 1);
-				System.out.println("Second to last: " + next.getX() + " " + next.getY() + 
-						" First: " + pathToHero.get(0).getX() + " "+ pathToHero.get(0).getY());
+				//System.out.println("Second to last: " + next.getX() + " " + next.getY() + 
+				//		" First: " + pathToHero.get(0).getX() + " "+ pathToHero.get(0).getY());
 				if (next.getX() * Reference.GRID_SIZE < getX()) {
 					Vector2f.add(velocity, new Vector2f(-1 * speed, 0), velocity);
 				} else if (next.getX() * Reference.GRID_SIZE > getX()) {

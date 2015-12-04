@@ -118,6 +118,7 @@ public class Main {
 		aman.loadSample("shoot", "res/audio/sfx/shoot.wav");
 		aman.loadSample("playerHurt", "res/audio/sfx/playerHurt.wav");
 		aman.loadSample("monsterHurt", "res/audio/sfx/monsterHurt.wav");
+		aman.loadSample("money", "res/audio/sfx/money.wav");
 	}
 	
 	public static void initSprites() throws SlickException {

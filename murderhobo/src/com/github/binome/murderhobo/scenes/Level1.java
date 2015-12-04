@@ -150,24 +150,6 @@ public class Level1 extends Level {
 		}
 	}
 
-	private void processTreasure() {
-		Treasure t;
-		Iterator<Treasure> treasureIt = treasures.iterator();
-		while (treasureIt.hasNext()) {
-			t = treasureIt.next();
-			if (t.getHitBox().intersects(Hero.getInstance().getHitBox())) {
-				Hero.getInstance().addScore(t.getValue());
-				t.isActive = false;
-			}
-			if (!t.isActive) {
-				// System.out.println("removing inactive entity");
-				treasureIt.remove();
-			} else {
-				t.draw();
-			}
-		}
-	}
-
 	private void createGrid() {
 		// initialize with default texture
 		for (int i = 0; i < CELLS_WIDE; i++) {
