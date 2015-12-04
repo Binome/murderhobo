@@ -22,7 +22,7 @@ public class Level1 extends Level {
 	private Scene nextScene;
 	
 	//Amount of time for pow effect to display when player is injured
-	public final int POW_TIME = 250;;
+	public final int POW_TIME = 250;
 	public int powTimer = POW_TIME;
 
 	public Level1() {
@@ -106,7 +106,7 @@ public class Level1 extends Level {
 			Cell c;
 			while (it.hasNext()) {
 				c = it.next();
-				if (!c.passable) {
+				if (!c.isPassable()) {
 					arr.isActive = false;
 				}
 			}
@@ -216,15 +216,34 @@ public class Level1 extends Level {
 		for (int i = 7; i <= 10; i++) {
 			grid[13][i].setTileType(Cell.TileType.INNER_EWALL);
 		}
-		grid[13][11].setTileType(Cell.TileType.INNER_SEWALL);
+		grid[13][11].setTileType(Cell.TileType.INNER_NEW_3WALL);
 		grid[12][11].setTileType(Cell.TileType.INNER_SWALL);
 		grid[11][11].setTileType(Cell.TileType.INNER_SWALL);
-		grid[8][11].setTileType(Cell.TileType.INNER_SWALL);
+		grid[8][11].setTileType(Cell.TileType.INNER_SEW_3WALL);
 		grid[7][11].setTileType(Cell.TileType.INNER_SWALL);
 		grid[6][11].setTileType(Cell.TileType.INNER_SWWALL);
 		grid[6][10].setTileType(Cell.TileType.INNER_WWALL);
 		grid[6][7].setTileType(Cell.TileType.INNER_WWALL);
-
+		
+		//Second room
+		for (int i = 12; i <= 18; i++){
+			grid[8][i].setTileType(Cell.TileType.INNER_WWALL);
+		}
+		grid[8][19].setTileType(Cell.TileType.INNER_SWWALL);
+		for (int i = 9; i <= 23; i++){
+			grid[i][19].setTileType(Cell.TileType.INNER_SWALL);
+		}
+		grid[24][19].setTileType(Cell.TileType.INNER_SEWALL);
+		grid[24][18].setTileType(Cell.TileType.INNER_EWALL);
+		for (int i = 14; i <= 21; i++){
+			grid[i][11].setTileType(Cell.TileType.INNER_NWALL);
+		}
+		grid[24][11].setTileType(Cell.TileType.INNER_NEWALL);
+		grid[24][12].setTileType(Cell.TileType.INNER_EWALL);
+		grid[24][13].setTileType(Cell.TileType.INNER_EWALL);
+		grid[24][14].setTileType(Cell.TileType.INNER_EWALL);
+		grid[24][17].setTileType(Cell.TileType.INNER_EWALL);
+		
 		// exit room
 		grid[56][36].setTileType(Cell.TileType.INNER_NWWALL);
 		grid[56][37].setTileType(Cell.TileType.INNER_WWALL);

@@ -36,4 +36,9 @@ public class Arrow extends InertialSprite {
 			isActive = false;
 		}
 	}
+
+	@Override
+	void tweakSpeed() {
+		
+	}
 }

@@ -107,7 +107,7 @@ public class Hero extends InertialSprite {
 		Cell c;
 		while (it.hasNext()) {
 			c = it.next();
-			if (!c.passable) {
+			if (!c.isPassable()) {
 				{
 
 					if (oldY + ourHero.getHeight() <= c.getHitBox().getY()) {
@@ -138,7 +138,7 @@ public class Hero extends InertialSprite {
 		}
 	}
 
-	private void tweakSpeed() {
+	protected void tweakSpeed() {
 		// enforce speed limit
 		if (Math.abs(velocity.getX()) > maxSpeed) {
 			if (velocity.getX() > 0) {

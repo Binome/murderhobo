@@ -117,11 +117,9 @@ public class Main {
 		
 		aman.loadSample("shoot", "res/audio/sfx/shoot.wav");
 		aman.loadSample("playerHurt", "res/audio/sfx/playerHurt.wav");
-
 	}
 	
-	public static void initSprites() throws SlickException
-	{
+	public static void initSprites() throws SlickException {
 		spriteMan = SpriteManager.getInstance();
 		
 		spriteMan.loadSpriteSheet("floor", "res/dawnlike/Objects/Floor.png");
@@ -139,7 +137,7 @@ public class Main {
 		spriteMan.loadSpriteSheet("POW", "res/pow.png",32,32);
 	}
 	
-	public static void initGUI() throws SlickException{
+	public static void initGUI() throws SlickException {
 		Image img = new Image("res/font/League_Gothic_0.png",false,Image.FILTER_NEAREST);
 		guiFont = new AngelCodeFont("res/font/League_Gothic.fnt", img);
 		guiBG = new SimpleEntity(Reference.SCR_WIDTH,32,(Color) Color.BLACK);

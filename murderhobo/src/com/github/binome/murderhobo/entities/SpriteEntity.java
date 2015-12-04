@@ -23,10 +23,8 @@ public class SpriteEntity extends Entity {
 	public void update(float delta) {
 	}
 	
-	public Cell getLocInLvl(Level lvl){
-		//Currently defaults to NW cell if Entity is in multiple Cells.
-		return lvl.getGrid()[(int) Math.floor(getX()/Reference.GRID_SIZE)]
-				[(int) Math.floor(getY()/Reference.GRID_SIZE)];
+	public Cell getLocInLvl(Level lvl){		
+		return lvl.getGrid()[(getX() + Reference.GRID_SIZE/2)/Reference.GRID_SIZE]
+				[(getY() + Reference.GRID_SIZE/2)/Reference.GRID_SIZE];
 	}
-
-} 
+}

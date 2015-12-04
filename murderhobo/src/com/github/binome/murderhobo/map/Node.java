@@ -7,9 +7,12 @@ public class Node extends Cell implements Comparable<Node>
 	private int f,h;
 	private boolean closed;
 	
-	public Node(int x, int y)
+	public Node(int x, int y, boolean passable)
 	{
-		super(x, y, Cell.TileType.FLOOR);
+		super(x, y, Cell.TileType.EWALL);
+		if (passable){
+			this.setTileType(Cell.TileType.FLOOR);
+		}
 	}
 
 	public Node getParent()
