@@ -162,6 +162,7 @@ public class Level1 extends Level {
 			}
 		}
 
+		//TODO: REPLACE ALL OF THIS WITH A BITMAP BASED LEVEL MAP
 		// walls
 		// corners
 		grid[0][0].setTileType(Cell.TileType.NWWALL);
@@ -246,7 +247,18 @@ public class Level1 extends Level {
 		grid[18][19].setTileType(Cell.TileType.INNER_SEW_3WALL);
 		grid[23][19].setTileType(Cell.TileType.INNER_SEW_3WALL);
 
-		// Treasure Room
+		//Cross
+		grid[45][20].setTileType(Cell.TileType.INNER_CEN_WALL);
+		grid[44][20].setTileType(Cell.TileType.INNER_NWALL);
+		grid[43][20].setTileType(Cell.TileType.INNER_NWALL);
+		grid[46][20].setTileType(Cell.TileType.INNER_NWALL);
+		grid[47][20].setTileType(Cell.TileType.INNER_NWALL);
+		grid[45][18].setTileType(Cell.TileType.INNER_EWALL);
+		grid[45][19].setTileType(Cell.TileType.INNER_EWALL);
+		grid[45][21].setTileType(Cell.TileType.INNER_EWALL);
+		grid[45][22].setTileType(Cell.TileType.INNER_EWALL);
+		
+		// Treasure Room 1
 		for (int i = 3; i <= 40; i++) {
 			grid[i][34].setTileType(Cell.TileType.INNER_NWALL);
 		}
@@ -254,6 +266,15 @@ public class Level1 extends Level {
 		for (int j = 35; j <= 38; j++) {
 			grid[41][j].setTileType(Cell.TileType.INNER_EWALL);
 		}
+		
+		//Treasure Room 2
+		for (int i = 35; i <= 58; i++){
+			grid[i][5].setTileType(Cell.TileType.INNER_SWALL);
+		}
+		grid[55][5].setTileType(Cell.TileType.INNER_NEW_3WALL);
+		grid[55][4].setTileType(Cell.TileType.INNER_EWALL);
+		grid[55][1].setTileType(Cell.TileType.INNER_EWALL);
+		
 
 		// exit room
 		grid[56][36].setTileType(Cell.TileType.INNER_NWWALL);
@@ -316,6 +337,35 @@ public class Level1 extends Level {
 			treasureGuard.setLoc(37 * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
 			monsters.add(treasureGuard);
 		}
+
+		Monster mon7 = new Monster();
+		mon7.setLoc(44 * Reference.GRID_SIZE, 19 * Reference.GRID_SIZE);
+		monsters.add(mon7);
+
+		Monster mon8 = new Monster();
+		mon8.setLoc(44 * Reference.GRID_SIZE, 21 * Reference.GRID_SIZE);
+		monsters.add(mon8);
+
+		Monster mon9 = new Monster();
+		mon9.setLoc(46 * Reference.GRID_SIZE, 19 * Reference.GRID_SIZE);
+		monsters.add(mon9);
+
+		Monster mon10 = new Monster();
+		mon10.setLoc(55 * Reference.GRID_SIZE, 2 * Reference.GRID_SIZE);
+		monsters.add(mon10);
+		
+		Monster mon11 = new Monster();
+		mon11.setLoc(55 * Reference.GRID_SIZE, 3 * Reference.GRID_SIZE);
+		monsters.add(mon11);
+		
+		for (int i = 54; i >= 35; i = i - 2){
+			Monster treasureGuard = new Monster();
+			treasureGuard.setLoc(i * Reference.GRID_SIZE, 1 * Reference.GRID_SIZE);
+			monsters.add(treasureGuard);
+			treasureGuard = new Monster();
+			treasureGuard.setLoc(i * Reference.GRID_SIZE, 4 * Reference.GRID_SIZE);
+			monsters.add(treasureGuard);
+		}
 	}
 
 	private void beginFight() {
@@ -343,6 +393,13 @@ public class Level1 extends Level {
 		
 		for (int i = 39; i <= 40; i++){
 			for (int j = 35; j <= 38; j++){
+				Treasure tRoomTreasure = new Treasure(Reference.LOOT_DEFAULT);
+				tRoomTreasure.setLoc(i * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
+				treasures.add(tRoomTreasure);
+			}
+		}
+		for (int i = 56; i <= 58; i++){
+			for (int j = 1; j <= 4; j++){
 				Treasure tRoomTreasure = new Treasure(Reference.LOOT_DEFAULT);
 				tRoomTreasure.setLoc(i * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
 				treasures.add(tRoomTreasure);
