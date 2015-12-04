@@ -21,7 +21,7 @@ public class Monster extends InertialSprite {
 	private int atkGap = 0;
 
 	private float speed = 0.075f;
-	private float maxSpeed = 0.30f;
+	private float maxSpeed = 0.32f;
 	private float friction = 0.025f;
 
 	public Monster() {

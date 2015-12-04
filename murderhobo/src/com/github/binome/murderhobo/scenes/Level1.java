@@ -330,6 +330,7 @@ public class Level1 extends Level {
 		mon6.setLoc(19 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
 		monsters.add(mon6);
 		
+		//SW Guards
 		for (int j = 35; j <= 38; j++){
 			Monster treasureGuard = new Monster();
 			treasureGuard.setLoc(38 * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
@@ -339,26 +340,28 @@ public class Level1 extends Level {
 			monsters.add(treasureGuard);
 		}
 
+		//Cross Guards
 		Monster mon7 = new Monster();
 		mon7.setLoc(44 * Reference.GRID_SIZE, 19 * Reference.GRID_SIZE);
 		monsters.add(mon7);
-
 		Monster mon8 = new Monster();
 		mon8.setLoc(44 * Reference.GRID_SIZE, 21 * Reference.GRID_SIZE);
 		monsters.add(mon8);
-
 		Monster mon9 = new Monster();
 		mon9.setLoc(46 * Reference.GRID_SIZE, 19 * Reference.GRID_SIZE);
 		monsters.add(mon9);
-
 		Monster mon10 = new Monster();
-		mon10.setLoc(55 * Reference.GRID_SIZE, 2 * Reference.GRID_SIZE);
+		mon10.setLoc(46 * Reference.GRID_SIZE, 21 * Reference.GRID_SIZE);
 		monsters.add(mon10);
 		
 		Monster mon11 = new Monster();
 		mon11.setLoc(55 * Reference.GRID_SIZE, 3 * Reference.GRID_SIZE);
 		monsters.add(mon11);
+		Monster mon12 = new Monster();
+		mon12.setLoc(55 * Reference.GRID_SIZE, 2 * Reference.GRID_SIZE);
+		monsters.add(mon12);
 		
+		//NE Guards
 		for (int i = 54; i >= 35; i = i - 2){
 			Monster treasureGuard = new Monster();
 			treasureGuard.setLoc(i * Reference.GRID_SIZE, 1 * Reference.GRID_SIZE);

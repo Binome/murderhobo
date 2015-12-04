@@ -16,6 +16,7 @@ import com.github.binome.murderhobo.map.Cell;
 import com.github.binome.murderhobo.scenes.Level;
 
 public class Hero extends InertialSprite {
+	private final float ARROW_MAX = 2.0f;
 	private final int STARTING_HEALTH = 4;
 	private int score;
 	private float speed = 0.05f;
@@ -73,8 +74,8 @@ public class Hero extends InertialSprite {
 			} else {
 				arrowCharge = arrowCharge + delta * 0.001f;
 			}
-			if (arrowCharge >= 1.0f) {
-				arrowCharge = 1.0f;
+			if (arrowCharge >= ARROW_MAX) {
+				arrowCharge = ARROW_MAX;
 			}
 		}
 		if (!Mouse.isButtonDown(0) && arrowCharge > 0) {
