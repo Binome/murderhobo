@@ -20,8 +20,8 @@ public class Level1 extends Level {
 	public final int CELLS_WIDE = 60;
 	public final int CELLS_TALL = 40;
 	private Scene nextScene;
-	
-	//Amount of time for pow effect to display when player is injured
+
+	// Amount of time for pow effect to display when player is injured
 	public final int POW_TIME = 250;
 	public int powTimer = POW_TIME;
 
@@ -68,21 +68,20 @@ public class Level1 extends Level {
 		Hero.getInstance().draw();
 		drawGUI();
 
-		//Is player injured?
-		if (powTimer < POW_TIME){
-			Main.spriteMan.get("pow").draw(Hero.getInstance().getX(),
-					Hero.getInstance().getY());
+		// Is player injured?
+		if (powTimer < POW_TIME) {
+			Main.spriteMan.get("pow").draw(Hero.getInstance().getX(), Hero.getInstance().getY());
 			powTimer += delta;
-		} else if (powTimer > POW_TIME){
+		} else if (powTimer > POW_TIME) {
 			powTimer = POW_TIME;
 		}
-		
-		//Is the hero dead?
-		if (Hero.getInstance().getHealth() <= 0){
+
+		// Is the hero dead?
+		if (Hero.getInstance().getHealth() <= 0) {
 			nextScene = new GameOver(Hero.getInstance().getScore(), Hero.getInstance().getKillCount());
 			return false;
 		}
-		
+
 		// Is the hero in the exit squares?
 		if (Hero.getInstance().getX() >= 57 * Reference.GRID_SIZE
 				&& Hero.getInstance().getY() >= 37 * Reference.GRID_SIZE) {
@@ -141,6 +140,10 @@ public class Level1 extends Level {
 				beginFight();
 			}
 
+			if (mon.getHitBox().intersects(Hero.getInstance().getHitBox())){
+				mon.goHostile();
+			}
+			
 			if (!mon.isActive) {
 				// System.out.println("removing inactive entity");
 				monIt.remove();
@@ -206,18 +209,18 @@ public class Level1 extends Level {
 		grid[6][11].setTileType(Cell.TileType.INNER_SWWALL);
 		grid[6][10].setTileType(Cell.TileType.INNER_WWALL);
 		grid[6][7].setTileType(Cell.TileType.INNER_WWALL);
-		
-		//Second room
-		for (int i = 12; i <= 18; i++){
+
+		// Second room
+		for (int i = 12; i <= 18; i++) {
 			grid[8][i].setTileType(Cell.TileType.INNER_WWALL);
 		}
-		grid[8][19].setTileType(Cell.TileType.INNER_SWWALL);
-		for (int i = 9; i <= 23; i++){
+		grid[8][19].setTileType(Cell.TileType.INNER_NSE_3WALL);
+		for (int i = 9; i <= 23; i++) {
 			grid[i][19].setTileType(Cell.TileType.INNER_SWALL);
 		}
 		grid[24][19].setTileType(Cell.TileType.INNER_SEWALL);
 		grid[24][18].setTileType(Cell.TileType.INNER_EWALL);
-		for (int i = 14; i <= 21; i++){
+		for (int i = 14; i <= 21; i++) {
 			grid[i][11].setTileType(Cell.TileType.INNER_NWALL);
 		}
 		grid[24][11].setTileType(Cell.TileType.INNER_NEWALL);
@@ -225,7 +228,33 @@ public class Level1 extends Level {
 		grid[24][13].setTileType(Cell.TileType.INNER_EWALL);
 		grid[24][14].setTileType(Cell.TileType.INNER_EWALL);
 		grid[24][17].setTileType(Cell.TileType.INNER_EWALL);
-		
+
+		// Bedrooms
+		for (int i = 8; i <= 23; i = i + 5) {
+			for (int j = 20; j <= 25; j++) {
+				grid[i][j].setTileType(Cell.TileType.INNER_WWALL);
+			}
+			grid[i][26].setTileType(Cell.TileType.INNER_NEW_3WALL);
+			grid[i + 1][26].setTileType(Cell.TileType.INNER_SWALL);
+			grid[i - 1][26].setTileType(Cell.TileType.INNER_SWALL);
+		}
+		grid[7][26].setTileType(Cell.TileType.FLOOR);
+		grid[8][26].setTileType(Cell.TileType.INNER_SWWALL);
+		grid[23][26].setTileType(Cell.TileType.INNER_SEWALL);
+		grid[24][26].setTileType(Cell.TileType.FLOOR);
+		grid[13][19].setTileType(Cell.TileType.INNER_SEW_3WALL);
+		grid[18][19].setTileType(Cell.TileType.INNER_SEW_3WALL);
+		grid[23][19].setTileType(Cell.TileType.INNER_SEW_3WALL);
+
+		// Treasure Room
+		for (int i = 3; i <= 40; i++) {
+			grid[i][34].setTileType(Cell.TileType.INNER_NWALL);
+		}
+		grid[41][34].setTileType(Cell.TileType.INNER_NEWALL);
+		for (int j = 35; j <= 38; j++) {
+			grid[41][j].setTileType(Cell.TileType.INNER_EWALL);
+		}
+
 		// exit room
 		grid[56][36].setTileType(Cell.TileType.INNER_NWWALL);
 		grid[56][37].setTileType(Cell.TileType.INNER_WWALL);
@@ -266,6 +295,24 @@ public class Level1 extends Level {
 		Monster mon3 = new Monster();
 		mon3.setLoc(23 * Reference.GRID_SIZE, 18 * Reference.GRID_SIZE);
 		monsters.add(mon3);
+
+		Monster mon4 = new Monster();
+		mon4.setLoc(9 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		monsters.add(mon4);
+
+		Monster mon5 = new Monster();
+		mon5.setLoc(14 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		monsters.add(mon5);
+
+		Monster mon6 = new Monster();
+		mon6.setLoc(19 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		monsters.add(mon6);
+		
+		for (int j = 35; j <= 38; j++){
+			Monster treasureGuard = new Monster();
+			treasureGuard.setLoc(38 * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
+			monsters.add(treasureGuard);
+		}
 	}
 
 	private void beginFight() {
@@ -278,6 +325,26 @@ public class Level1 extends Level {
 		Treasure t1 = new Treasure(Reference.LOOT_DEFAULT);
 		t1.setLoc(10 * Reference.GRID_SIZE, 8 * Reference.GRID_SIZE);
 		treasures.add(t1);
+		
+		Treasure t2 = new Treasure(Reference.LOOT_DEFAULT);
+		t2.setLoc(12 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		treasures.add(t2);
+		
+		Treasure t3 = new Treasure(Reference.LOOT_DEFAULT);
+		t3.setLoc(17 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		treasures.add(t3);
+		
+		Treasure t4 = new Treasure(Reference.LOOT_DEFAULT);
+		t4.setLoc(22 * Reference.GRID_SIZE, 20 * Reference.GRID_SIZE);
+		treasures.add(t4);
+		
+		for (int i = 39; i <= 40; i++){
+			for (int j = 35; j <= 38; j++){
+				Treasure tRoomTreasure = new Treasure(Reference.LOOT_DEFAULT);
+				tRoomTreasure.setLoc(i * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
+				treasures.add(tRoomTreasure);
+			}
+		}
 	}
 
 	public void spawnTreasure(int x, int y, int value) {
@@ -287,13 +354,13 @@ public class Level1 extends Level {
 		this.getInstance();
 		Level.treasures.add(t);
 	}
-	
+
 	@Override
 	public Scene nextScene() {
 		return nextScene;
 	}
-	
-	public void applyPow(){
+
+	public void applyPow() {
 		powTimer = 0;
 	}
 

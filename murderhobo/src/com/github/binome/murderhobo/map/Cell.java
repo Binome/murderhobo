@@ -67,6 +67,7 @@ public class Cell extends Entity {
 
 		INNER_SEW_3WALL(Main.spriteMan.get("wall").getSprite(4,12),false),
 		INNER_NEW_3WALL(Main.spriteMan.get("wall").getSprite(4,14),false),
+		INNER_NSE_3WALL(Main.spriteMan.get("wall").getSprite(3,13),false),
 		
 		INNER_NWALL(Main.spriteMan.get("wall").getSprite(1,12),false),
 		INNER_EWALL(Main.spriteMan.get("wall").getSprite(0,13),false),
