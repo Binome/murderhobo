@@ -23,6 +23,8 @@ public class Hero extends InertialSprite {
 	private float arrowCharge = 0;
 	private int health;
 	private int killCount;
+	private final int INVULN_TIME = 500;
+	private float invulnTimer = INVULN_TIME;
 
 	private static Hero ourHero;
 
@@ -46,7 +48,6 @@ public class Hero extends InertialSprite {
 	}
 
 	public void update(float delta, Level lvl) {
-		
 		int oldX = getX();
 		int oldY = getY();
 
@@ -100,6 +101,13 @@ public class Hero extends InertialSprite {
 		tweakSpeed();
 
 		super.update(delta);
+
+		if (invulnTimer < INVULN_TIME) {
+			invulnTimer = (invulnTimer + delta);
+			if (invulnTimer > INVULN_TIME) {
+				invulnTimer = INVULN_TIME;
+			}
+		}
 
 		// Check wall collision
 		ArrayList<Cell> in = inCells(lvl.getInstance());
@@ -194,22 +202,25 @@ public class Hero extends InertialSprite {
 	public int getScore() {
 		return score;
 	}
-	
-	public int getKillCount(){
+
+	public int getKillCount() {
 		return killCount;
 	}
-	
-	public void addKill(){
+
+	public void addKill() {
 		killCount++;
 	}
-	
-	public int getHealth(){
+
+	public int getHealth() {
 		return health;
 	}
-	
-	public void applyWound(int damage, Level lvl){
-		health = health - damage;
-		Main.aman.play("playerHurt");
-		lvl.getInstance().applyPow();
+
+	public void applyWound(int damage, Level lvl) {
+		if (invulnTimer >= INVULN_TIME){
+			health = health - damage;
+			Main.aman.play("playerHurt");
+			lvl.getInstance().applyPow();
+			invulnTimer = 0;
+		}
 	}
 }

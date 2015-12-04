@@ -50,6 +50,8 @@ public class Monster extends InertialSprite {
 			Cell heroLoc = Hero.getInstance().getLocInLvl(lvl);
 			Cell monLoc = getLocInLvl(lvl);
 			
+			//Avoid setting start location to an impassable square
+			//that the monster overlaps
 			if (!monLoc.isPassable()){
 				if (lvl.getGrid()[monLoc.getX()+1][monLoc.getY()].isPassable()){
 					monLoc=lvl.getGrid()[monLoc.getX()+1][monLoc.getY()];
@@ -78,7 +80,7 @@ public class Monster extends InertialSprite {
 				} else if (next.getY() * Reference.GRID_SIZE > getY()) {
 					Vector2f.add(velocity, new Vector2f(0, speed), velocity);
 				}
-			} else if (Math.abs(Hero.getInstance().getX() - getX()) > ATK_RANGE
+			} else if (Math.abs(Hero.getInstance().getX() - getX()) > ATK_RANGE //close the gap
 					|| Math.abs(Hero.getInstance().getY() - getY()) > ATK_RANGE) {
 				if (Math.abs(Hero.getInstance().getX() - getX()) > ATK_RANGE && getX() > Hero.getInstance().getX()) {
 					Vector2f.add(velocity, new Vector2f(-1 * speed, 0), velocity);
@@ -96,7 +98,7 @@ public class Monster extends InertialSprite {
 
 			tweakSpeed();
 
-			super.update(delta);
+			super.update(delta); //physics happens here
 
 			// Check wall collision
 			ArrayList<Cell> in = inCells(lvl.getInstance());
@@ -106,7 +108,7 @@ public class Monster extends InertialSprite {
 				c = it.next();
 				if (!c.isPassable()) {
 					{
-						System.out.println("In unpassable cell " + c.getX() + " " + c.getY());
+						//System.out.println("In unpassable cell " + c.getX() + " " + c.getY());
 						if (oldY + getHeight() <= c.getHitBox().getY()) {
 							setLoc(getX(), c.getHitBox().getY() - getHeight());
 							velocity.setY(0.0f);
@@ -133,6 +135,7 @@ public class Monster extends InertialSprite {
 					}
 				}
 			}
+			//ATTACK!
 			if (atkGap <= 0 && Math.abs(Hero.getInstance().getX() - getX()) < ATK_RANGE
 					&& Math.abs(Hero.getInstance().getY() - getY()) < ATK_RANGE) {
 				hurtPlayer(lvl);

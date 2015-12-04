@@ -312,6 +312,9 @@ public class Level1 extends Level {
 			Monster treasureGuard = new Monster();
 			treasureGuard.setLoc(38 * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
 			monsters.add(treasureGuard);
+			treasureGuard = new Monster();
+			treasureGuard.setLoc(37 * Reference.GRID_SIZE, j * Reference.GRID_SIZE);
+			monsters.add(treasureGuard);
 		}
 	}
 
