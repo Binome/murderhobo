@@ -70,7 +70,7 @@ public class Hero extends InertialSprite {
 		// shoot
 		if (Mouse.isButtonDown(0)) {
 			if (arrowCharge == 0) {
-				arrowCharge = 0.03f;
+				arrowCharge = 0.05f;
 			} else {
 				arrowCharge = arrowCharge + delta * 0.001f;
 			}
