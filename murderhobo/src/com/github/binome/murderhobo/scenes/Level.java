@@ -1,5 +1,6 @@
 package com.github.binome.murderhobo.scenes;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.newdawn.slick.Image;
@@ -91,4 +92,16 @@ public abstract class Level extends Scene {
 	public abstract void applyPow();
 	
 	public abstract void spawnTreasure(int x, int y, int value);
+
+	public void howlAt(int x, int y) {
+		Monster mon;
+		Iterator<Monster> monIt = monsters.iterator();
+		while (monIt.hasNext()) {
+			mon = monIt.next();
+			float distance = (float) Math.sqrt((mon.getX()-x)*(mon.getX()-x) + (mon.getY()-y)*(mon.getY()-y));
+			if (distance <= Reference.HOWL_RANGE){
+				mon.goHostile();
+			}
+		}
+	}
 }

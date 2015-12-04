@@ -276,6 +276,14 @@ public class Level1 extends Level {
 		Monster mon1 = new Monster();
 		mon1.setLoc(12 * Reference.GRID_SIZE, 9 * Reference.GRID_SIZE);
 		monsters.add(mon1);
+
+		Monster mon2 = new Monster();
+		mon2.setLoc(23 * Reference.GRID_SIZE, 12 * Reference.GRID_SIZE);
+		monsters.add(mon2);
+
+		Monster mon3 = new Monster();
+		mon3.setLoc(23 * Reference.GRID_SIZE, 18 * Reference.GRID_SIZE);
+		monsters.add(mon3);
 	}
 
 	private void beginFight() {

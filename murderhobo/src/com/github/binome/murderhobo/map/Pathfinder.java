@@ -27,7 +27,7 @@ public class Pathfinder {
 				Node newNode = new Node(i, j, g[i][j].isPassable());
 				grid[i][j] = newNode;
 				newNode.setH(AStarHeuristic(newNode));
-				
+
 			}
 		}
 
@@ -45,13 +45,13 @@ public class Pathfinder {
 		open.add(start);
 		Node current = null;
 
-//		for (int i = 0; i < grid.length; i++) {
-//			for (int j = 0; j < grid[0].length; j++) {
-//				Node newNode = new Node(i, j);
-//				grid[i][j] = newNode;
-//				newNode.setH(AStarHeuristic(newNode));
-//			}
-//		}
+		// for (int i = 0; i < grid.length; i++) {
+		// for (int j = 0; j < grid[0].length; j++) {
+		// Node newNode = new Node(i, j);
+		// grid[i][j] = newNode;
+		// newNode.setH(AStarHeuristic(newNode));
+		// }
+		// }
 		// System.out.println(grid.length + " " + grid[0].length);
 
 		while (!open.isEmpty()) {

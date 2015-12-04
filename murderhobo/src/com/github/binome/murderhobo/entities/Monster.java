@@ -189,6 +189,8 @@ public class Monster extends InertialSprite {
 
 	public void applyAttack(Vector2f v, Level lvl) {
 		health = health - v.length();
+		Main.aman.play("monsterHurt");
+		lvl.howlAt(getX(),getY());
 		if (health <= 0) {
 			die(lvl.getInstance());
 		}
